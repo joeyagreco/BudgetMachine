@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 from datetime import datetime
 
+from server.models.Transaction import Transaction
+
 load_dotenv()
 
 
@@ -29,7 +31,7 @@ class DatabaseClient:
             newId = uuid.uuid1()
         return newId.hex
 
-    def getTransaction(self, transactionId: str):
+    def getTransaction(self, transactionId: str) -> Transaction:
         """
         Returns a dictionary object of the league or an Error object if not retrieved
         https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
@@ -37,12 +39,13 @@ class DatabaseClient:
         response = self.__collection.find_one({"_id": transactionId})
         # response will be None if not found
         if response:
-            return response
+            print(response)
+            return Transaction(response["_id"], response["amount"], response["note"], response["category"], response["date"].date())
         else:
             #TODO return Error(f"Could not find a transaction with ID: {transactionId}")
             return None
 
-    def addTransaction(self, date: datetime.date, amount: float, note: str, category: str) -> str:
+    def addTransaction(self, amount: float, note: str, category: str, date: datetime.date) -> str:
         """
         Adds a transaction with a new generated ID to the database
         Returns the new transaction's ID or an Error object if not inserted
@@ -56,7 +59,7 @@ class DatabaseClient:
         else:
             date = datetime.combine(date, datetime.max.time())
         # construct default transaction object
-        transaction = {"_id": self.__generateId(), "date": date, "amount": amount, "note": note, "category": category}
+        transaction = {"_id": self.__generateId(), "amount": amount, "note": note, "category": category, "date": date}
         response = self.__collection.insert_one(transaction)
         if response.acknowledged:
             return response.inserted_id
