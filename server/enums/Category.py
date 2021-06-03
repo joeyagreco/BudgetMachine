@@ -7,6 +7,7 @@ class Category:
     RESTAURANT = "RESTAURANT"
     CLOTHES = "CLOTHES"
     CAR = "CAR"
+    NECESSITY = "NECESSITY"
     PLEASURE = "PLEASURE"
     RANDOM = "RANDOM"
 
