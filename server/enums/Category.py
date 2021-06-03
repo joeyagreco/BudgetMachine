@@ -8,6 +8,8 @@ class Category:
     CLOTHES = "CLOTHES"
     CAR = "CAR"
     NECESSITY = "NECESSITY"
+    # QOL = Quality of Life
+    QOL = "QOL"
     PLEASURE = "PLEASURE"
     RANDOM = "RANDOM"
 
