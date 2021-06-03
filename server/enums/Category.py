@@ -5,7 +5,7 @@ class Category:
     GAS = "GAS"
     WORK_MEAL = "WORK MEAL"
     RESTAURANT = "RESTAURANT"
-    CLOTHES = "CLOTHES"
+    CLOTHING = "CLOTHING"
     CAR = "CAR"
     NECESSITY = "NECESSITY"
     # QOL = Quality of Life
