@@ -39,7 +39,6 @@ class DatabaseClient:
         response = self.__collection.find_one({"_id": transactionId})
         # response will be None if not found
         if response:
-            print(response)
             return Transaction(response["_id"], response["amount"], response["note"], response["category"], response["date"].date())
         else:
             #TODO return Error(f"Could not find a transaction with ID: {transactionId}")
