@@ -41,15 +41,19 @@ class DatabaseClient:
         else:
             return Error(f"Could not find a transaction with ID: {transactionId}")
 
-    def addTransaction(self, date: object, amount: float, note: str, category: str) -> str:
+    def addTransaction(self, date: datetime.date, amount: float, note: str, category: str) -> str:
         """
         Adds a transaction with a new generated ID to the database
         Returns the new transaction's ID or an Error object if not inserted
         https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
         # if date is null, set current time as date
+        # NOTE: PyMongo does not support just dates, so we must convert to a datetime (we use max time)
+        # source: https://stackoverflow.com/questions/30553406/python-bson-errors-invaliddocument-cannot-encode-object-datetime-date2015-3
         if not date:
-            date = datetime.now()
+            date = datetime.combine(datetime.now(), datetime.max.time())
+        else:
+            date = datetime.combine(date, datetime.max.time())
         # construct default transaction object
         transaction = {"_id": self.__generateId(), "date": date, "amount": amount, "note": note, "category": category}
         response = self.__collection.insert_one(transaction)
