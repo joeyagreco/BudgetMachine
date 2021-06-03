@@ -29,7 +29,7 @@ class DatabaseClient:
             newId = uuid.uuid1()
         return newId.hex
 
-    def getTransaction(self, transactionId: int):
+    def getTransaction(self, transactionId: str):
         """
         Returns a dictionary object of the league or an Error object if not retrieved
         https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
@@ -39,7 +39,8 @@ class DatabaseClient:
         if response:
             return response
         else:
-            return Error(f"Could not find a transaction with ID: {transactionId}")
+            #TODO return Error(f"Could not find a transaction with ID: {transactionId}")
+            return None
 
     def addTransaction(self, date: datetime.date, amount: float, note: str, category: str) -> str:
         """
@@ -60,28 +61,28 @@ class DatabaseClient:
         if response.acknowledged:
             return response.inserted_id
         else:
-            # return Error("Could not insert transaction into database.")
+            #TODO return Error("Could not insert transaction into database.")
             return "error"
 
-    # def updateLeague(self, leagueId: int, leagueName: str, years):
-    #     """
-    #     Updates a league with given parameters
-    #     Returns a Document object or an Error object if not updated
-    #     https://docs.mongodb.com/manual/reference/method/db.collection.update/
-    #     https://specify.io/how-tos/mongodb-update-documents
-    #     """
-    #     league = self.getLeague(leagueId)
-    #     if isinstance(league, Error):
-    #         return league
-    #     else:
-    #         league["leagueName"] = leagueName
-    #         league["years"] = years
-    #         response = self.__collection.update({"_id": leagueId}, league)
-    #         if response:
-    #             return response
-    #         else:
-    #             return Error("Could not update league.")
-    #
+    def updateTransaction(self, transactionId: str, newNote: str):
+        """
+        Updates a league with given parameters
+        Returns a Document object or an Error object if not updated
+        https://docs.mongodb.com/manual/reference/method/db.collection.update/
+        https://specify.io/how-tos/mongodb-update-documents
+        """
+        transaction = self.getTransaction(transactionId)
+        if not transaction:
+            return None
+        else:
+            transaction["note"] = newNote
+            response = self.__collection.update({"_id": transactionId}, transaction)
+            if response:
+                return response
+            else:
+                #TODO return Error("Could not update league.")
+                return None
+
     # def deleteLeague(self, leagueId: int):
     #     """
     #     Deletes the league with the given ID
