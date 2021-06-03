@@ -41,7 +41,7 @@ class DatabaseClient:
         else:
             return Error(f"Could not find a transaction with ID: {transactionId}")
 
-    def addTransaction(self, date: object, amount: float, note: str, importance: int):
+    def addTransaction(self, date: object, amount: float, note: str, category: str) -> str:
         """
         Adds a transaction with a new generated ID to the database
         Returns the new transaction's ID or an Error object if not inserted
@@ -51,12 +51,13 @@ class DatabaseClient:
         if not date:
             date = datetime.now()
         # construct default transaction object
-        transaction = {"_id": self.__generateId(), "date": date, "amount": amount, "note": note, "importance": importance}
+        transaction = {"_id": self.__generateId(), "date": date, "amount": amount, "note": note, "category": category}
         response = self.__collection.insert_one(transaction)
         if response.acknowledged:
             return response.inserted_id
         else:
-            return Error("Could not insert transaction into database.")
+            # return Error("Could not insert transaction into database.")
+            return "error"
 
     # def updateLeague(self, leagueId: int, leagueName: str, years):
     #     """

@@ -1,0 +1,13 @@
+class Category:
+    BILL = "BILL"
+    SUBSCRIPTION = "SUBSCRIPTION"
+    GROCERY = "GROCERY"
+    GAS = "GAS"
+    WORK_MEAL = "WORK MEAL"
+    RESTAURANT = "RESTAURANT"
+    CLOTHES = "CLOTHES"
+    CAR = "CAR"
+    PLEASURE = "PLEASURE"
+    RANDOM = "RANDOM"
+
+
