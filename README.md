@@ -1,1 +1,2 @@
 # BudgetMachine
+# Initial commit
