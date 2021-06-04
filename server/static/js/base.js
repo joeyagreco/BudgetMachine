@@ -1,3 +1,7 @@
+function reloadPage() {
+    location.reload();
+}
+
 function leagueHomepageRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
