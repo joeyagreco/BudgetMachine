@@ -6,11 +6,14 @@ class Category:
     WORK_MEAL = "WORK MEAL"
     RESTAURANT = "RESTAURANT"
     CLOTHING = "CLOTHING"
+    GIFT = "GIFT"
     CAR = "CAR"
     NECESSITY = "NECESSITY"
     # QOL = Quality of Life
     QOL = "QOL"
     PLEASURE = "PLEASURE"
     RANDOM = "RANDOM"
+    # INCOME CATAEGORIES
+    PAYCHECK = "PAYCHECK"
 
 
