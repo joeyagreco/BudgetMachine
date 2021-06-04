@@ -1,0 +1,79 @@
+html {
+  width: 100%;
+  height: 100%;
+  overflow-y: visible;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.topSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 2%;
+}
+
+.bottomSection {
+  width: 100%;
+  height: 100%;
+}
+
+.pageTitle {
+  font-size: 400%;
+  order: 1;
+  text-align: center;
+  color: black;
+}
+
+.pageSubtitle {
+  font-size: 200%;
+  order: 2;
+  text-align: center;
+  color: black;
+}
+
+.errorSection {
+    width: 100%;
+    order: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar {
+    height: 4rem;
+    padding-left: 1rem;
+    justify-content: flex-start !important;
+}
+
+.nav-item {
+    font-size: 1.2rem;
+    color: black;
+}
+
+.nav-item:hover {
+    color: grey;
+}
+
+button {
+    cursor: pointer;
+}
+
+.loader-wrapper {
+    opacity: 0.2;
+    background-color: #ccc;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
