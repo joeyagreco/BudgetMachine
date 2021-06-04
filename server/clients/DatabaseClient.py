@@ -39,12 +39,12 @@ class DatabaseClient:
         response = self.__collection.find_one({"_id": transactionId})
         # response will be None if not found
         if response:
-            return Transaction(response["_id"], response["amount"], response["note"], response["category"], response["date"].date())
+            return Transaction(response["_id"], response["amount"], response["note"], response["category"], response["isIncome"], response["date"].date())
         else:
             #TODO return Error(f"Could not find a transaction with ID: {transactionId}")
             return None
 
-    def addTransaction(self, amount: float, note: str, category: str, date: datetime.date) -> str:
+    def addTransaction(self, amount: float, note: str, category: str, isIncome: bool, date: datetime.date) -> str:
         """
         Adds a transaction with a new generated ID to the database
         Returns the new transaction's ID or an Error object if not inserted
@@ -58,7 +58,7 @@ class DatabaseClient:
         else:
             date = datetime.combine(date, datetime.max.time())
         # construct default transaction object
-        transaction = {"_id": self.__generateId(), "amount": amount, "note": note, "category": category, "date": date}
+        transaction = {"_id": self.__generateId(), "amount": amount, "note": note, "category": category, "isIncome": isIncome, "date": date}
         response = self.__collection.insert_one(transaction)
         if response.acknowledged:
             return response.inserted_id
