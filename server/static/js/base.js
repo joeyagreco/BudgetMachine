@@ -37,6 +37,10 @@ function stopLoading() {
     document.querySelector("body").style.visibility = "visible";
 }
 
+function onTransactionClick() {
+    document.getElementById("popup-form").style.display = "block";
+}
+
 document.onreadystatechange = function() {
     if (document.readyState !== "complete") {
         startLoading();

@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+<!--    jQuery-->
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- custom alert script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- bootstrap -->
@@ -35,8 +38,8 @@
       <a class="navbar-brand" href="#" onclick="reloadPage()">
         <span>BudgetMachine</span>
       </a>
-      <a class="nav-item nav-link primaryFontColor primaryFontColorWithHover" href="#" onclick=""><i class="fas fa-home"></i> <span class="navBarText">Home</span></a>
-      <a class="nav-item nav-link primaryFontColor primaryFontColorWithHover" href="#" onclick=""><i class="fas fa-dollar-sign"></i> <span class="navBarText">Transaction</span></a>
+      <a class="nav-item nav-link" href="#" onclick=""><i class="fas fa-home"></i> <span class="navBarText">Home</span></a>
+      <a class="nav-item nav-link" href="#" onclick="onTransactionClick()"><i class="fas fa-dollar-sign"></i> <span class="navBarText">Transaction</span></a>
     </nav>
 
     <div class="topSection">
@@ -49,7 +52,20 @@
     </div>
 
     <div class="bottomSection">
-      {% block content %}{% endblock %}
+      {% block content %}
+        <div class="center hideform" id="popup-form">
+        <button id="close" style="float: right;">X</button>
+        <form action="/action_page.php">
+          First name:<br>
+          <input type="text" name="firstname" value="Mickey">
+          <br>
+          Last name:<br>
+          <input type="text" name="lastname" value="Mouse">
+          <br><br>
+          <input type="submit" value="Submit">
+        </form>
+        </div>
+      {% endblock %}
     </div>
 
   </body>
