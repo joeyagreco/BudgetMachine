@@ -38,9 +38,10 @@ class DatabaseClient:
         response = self.__collection.find_one({"_id": transactionId})
         # response will be None if not found
         if response:
-            return Transaction(response["_id"], response["amount"], response["note"], response["category"], response["isIncome"], response["date"].date())
+            return Transaction(response["_id"], response["amount"], response["note"], response["category"],
+                               response["isIncome"], response["date"].date())
         else:
-            #TODO return Error(f"Could not find a transaction with ID: {transactionId}")
+            # TODO return Error(f"Could not find a transaction with ID: {transactionId}")
             return None
 
     def addTransaction(self, amount: float, note: str, category: str, isIncome: bool, date: datetime.date) -> str:
@@ -57,12 +58,13 @@ class DatabaseClient:
         else:
             date = datetime.combine(date, datetime.max.time())
         # construct default transaction object
-        transaction = {"_id": self.__generateId(), "amount": amount, "note": note, "category": category, "isIncome": isIncome, "date": date}
+        transaction = {"_id": self.__generateId(), "amount": amount, "note": note, "category": category,
+                       "isIncome": isIncome, "date": date}
         response = self.__collection.insert_one(transaction)
         if response.acknowledged:
             return response.inserted_id
         else:
-            #TODO return Error("Could not insert transaction into database.")
+            # TODO return Error("Could not insert transaction into database.")
             return "error"
 
     def updateTransaction(self, transactionId: str, newNote: str):
@@ -81,7 +83,7 @@ class DatabaseClient:
             if response:
                 return response
             else:
-                #TODO return Error("Could not update league.")
+                # TODO return Error("Could not update league.")
                 return None
 
     def deleteTransaction(self, transactionId: str) -> bool:
