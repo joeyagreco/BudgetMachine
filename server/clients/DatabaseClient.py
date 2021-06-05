@@ -24,7 +24,6 @@ class DatabaseClient:
     def __generateId(self) -> str:
         """
         Returns a new and unused random id
-        Will be between 100000-999999 [always 6 digits]
         """
         newId = uuid.uuid1()
         while self.__collection.find_one({"_id": newId}):

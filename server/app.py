@@ -5,4 +5,4 @@ app = Flask(__name__)
 if __name__ == "__main__":
     from views.homepage import *
     from views.favicon import *
-    app.run()
+    app.run(debug=True)
