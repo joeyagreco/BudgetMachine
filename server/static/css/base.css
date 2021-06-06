@@ -120,6 +120,10 @@ button {
     color: black;
 }
 
+#close-button:hover {
+    opacity: 0.75;
+}
+
 #amount-section {
     display: flex;
     flex-direction: column;
