@@ -14,15 +14,18 @@ function stopLoading() {
 }
 
 function onTransactionClick() {
-    document.getElementById("popup-form").style.display = "flex";
+    document.getElementById("transaction-form").style.display = "flex";
+    document.getElementById("form-background").style.display = "block";
 }
 
 function onTransactionCloseClick() {
-    document.getElementById("popup-form").style.display = "none";
+    document.getElementById("transaction-form").style.display = "none";
+    document.getElementById("form-background").style.display = "none";
 }
 
 function onTransactionSubmitClick() {
-    document.getElementById("popup-form").style.display = "none";
+    document.getElementById("transaction-form").style.display = "none";
+    document.getElementById("form-background").style.display = "none";
 }
 
 document.onreadystatechange = function() {

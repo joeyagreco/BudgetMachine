@@ -77,14 +77,24 @@ button {
     justify-content: center;
 }
 
-.transaction-form {
-    display: none;
+#form-background {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+}
+
+#transaction-form {
+    display: flex;
     background-color: #d9d9d9;
     margin: auto;
     width: 15%;
     padding: 20px;
+    margin-top: 150px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     flex-direction: column;
+    position: relative;
 }
 
 #close-button {
@@ -92,7 +102,21 @@ button {
     float: right;
 }
 
+#income-section {
+    display: flex;
+    flex-direction: row;
+}
+
+#note-input {
+    display: flex;
+    flex-direction: row;
+}
+
+#note-label {
+    height: 100%;
+}
+
 #note {
     resize: none;
-    width: 100%;
+    height: 100%;
 }
