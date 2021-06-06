@@ -94,17 +94,36 @@ button {
     margin-top: 150px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     flex-direction: column;
+    align-content: space-around;
     position: relative;
+}
+
+#popup-top-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 #close-button {
     color: black;
-    float: right;
+}
+
+#amount-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#category-section {
+    display: flex;
+    justify-content: center;
 }
 
 #income-section {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 #note-input {
@@ -119,4 +138,8 @@ button {
 #note {
     resize: none;
     height: 100%;
+}
+
+#submit-button {
+
 }
