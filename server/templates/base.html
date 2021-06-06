@@ -97,13 +97,12 @@
               </div>
 
               <div class="input-group" id="note-input">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="note-label">Note</span>
-                </div>
-                <textarea class="form-control" id="note" aria-label="With textarea"></textarea>
+                <textarea class="form-control" id="note" aria-label="With textarea" placeholder="Note"></textarea>
               </div>
 
-              <p>Date:</p>
+              <div id="date-section">
+                <input type="date">
+              </div>
 
               <button class="btn btn-secondary" id="submit-button" type="button" onclick="onTransactionSubmitClick()">Submit</button>
 

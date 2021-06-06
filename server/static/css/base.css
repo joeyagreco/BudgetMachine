@@ -147,6 +147,6 @@ button {
     height: 100%;
 }
 
-#submit-button {
-
+#date-section {
+    display: flex;
 }
