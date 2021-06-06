@@ -2,30 +2,6 @@ function reloadPage() {
     location.reload();
 }
 
-function leagueHomepageRedirect() {
-    var leagueId = document.getElementById("league_id").value;
-    startLoading();
-    window.location = "/league-homepage?league_id=" + leagueId;
-}
-
-function statExplanationRedirect() {
-    var leagueId = document.getElementById("league_id").value;
-    startLoading();
-    window.location = "/stats-explained?league_id=" + leagueId;
-}
-
-function aboutRedirect() {
-    var leagueId = document.getElementById("league_id").value;
-    startLoading();
-    window.location = "/about?league_id=" + leagueId;
-}
-
-function feedbackRedirect() {
-    var leagueId = document.getElementById("league_id").value;
-    startLoading();
-    window.location = "/feedback?league_id=" + leagueId;
-}
-
 function startLoading() {
     document.querySelector("#loader-wrapper").style.display = "flex";
     document.querySelector("#loader-wrapper").style.visibility = "visible";
@@ -38,7 +14,11 @@ function stopLoading() {
 }
 
 function onTransactionClick() {
-    document.getElementById("popup-form").style.display = "block";
+    document.getElementById("popup-form").style.display = "flex";
+}
+
+function onTransactionCloseClick() {
+    document.getElementById("popup-form").style.display = "none";
 }
 
 document.onreadystatechange = function() {

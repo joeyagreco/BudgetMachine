@@ -53,16 +53,16 @@
 
     <div class="bottomSection">
       {% block content %}
-        <div class="center hideform" id="popup-form">
-        <button id="close" style="float: right;">X</button>
-        <form action="/action_page.php">
+        <div class="transaction-form" id="popup-form">
+        <a href="#" id="close-button" onclick="onTransactionCloseClick()"><i class="fas fa-times-circle"></i></a>
+        <form>
           First name:<br>
           <input type="text" name="firstname" value="Mickey">
           <br>
           Last name:<br>
           <input type="text" name="lastname" value="Mouse">
           <br><br>
-          <input type="submit" value="Submit">
+          <button type="submit">Submit</button>
         </form>
         </div>
       {% endblock %}
