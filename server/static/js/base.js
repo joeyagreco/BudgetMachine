@@ -43,7 +43,6 @@ function updateCategoryDropdown(category) {
     let button =  document.getElementById("category-button")
     button.value = category;
     button.innerText = category;
-
 }
 
 document.onreadystatechange = function() {
