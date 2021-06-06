@@ -44,6 +44,9 @@ function updateCategoryDropdown(category) {
     let button =  document.getElementById("category-button")
     button.value = category;
     button.innerText = category;
+
+    // validation for submit button
+    activateSubmitButtonIfValidInput();
 }
 
 function setTransactionPopupToDefaultValues() {
@@ -78,6 +81,18 @@ function setTransactionPopupToDefaultValues() {
     let yyyy = date.getFullYear();
     today = yyyy + "-" + mm + "-" +  dd;
     document.getElementById("date-input").value = today;
+}
+
+function activateSubmitButtonIfValidInput() {
+    const amount = document.getElementById("amount-input").value.replaceAll(/\s/g,'');
+    const category = document.getElementById("category-button").innerText;
+    console.log(category);
+    if(amount.length > 0 && category != "Category") {
+        document.getElementById("submit-button").classList.remove("disabled");
+    }
+    else {
+        document.getElementById("submit-button").classList.add("disabled");
+    }
 }
 
 document.onreadystatechange = function() {
