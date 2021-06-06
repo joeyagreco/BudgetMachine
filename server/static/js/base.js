@@ -21,6 +21,10 @@ function onTransactionCloseClick() {
     document.getElementById("popup-form").style.display = "none";
 }
 
+function onTransactionSubmitClick() {
+    document.getElementById("popup-form").style.display = "none";
+}
+
 document.onreadystatechange = function() {
     if (document.readyState !== "complete") {
         startLoading();

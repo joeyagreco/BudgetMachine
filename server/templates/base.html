@@ -9,14 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+      <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <!--    jQuery-->
     <script type="text/javascript" src="js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- custom alert script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <!-- Add icon library -->
     <script src="https://kit.fontawesome.com/e509e6f024.js" crossorigin="anonymous"></script>
     {% block head %}
@@ -56,13 +56,20 @@
         <div class="transaction-form" id="popup-form">
         <a href="#" id="close-button" onclick="onTransactionCloseClick()"><i class="fas fa-times-circle"></i></a>
         <form>
-          First name:<br>
-          <input type="text" name="firstname" value="Mickey">
+          Amount:<br>
+          <input type="text" name="amount">
           <br>
-          Last name:<br>
-          <input type="text" name="lastname" value="Mouse">
+          Category:<br>
+          <input type="text" name="category">
+          Income?<br>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+          </div>
+          <br>
+          Note:<br>
+          <textarea id="note" name="note"></textarea>
           <br><br>
-          <button type="submit">Submit</button>
+          <button class="btn btn-secondary" type="button" onclick="onTransactionSubmitClick()">Submit</button>
         </form>
         </div>
       {% endblock %}
