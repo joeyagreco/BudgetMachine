@@ -59,10 +59,13 @@
       {% block content %}
         <div id="form-background">
           <div id="transaction-form">
+
             <div id="popup-top-section">
               <a href="#" id="close-button" onclick="onTransactionCloseClick()"><i class="fas fa-times-circle fa-lg"></i></a>
             </div>
-            <form>
+
+            <form id="transaction-submit-form">
+
               <div id="amount-section">
                 <p>Amount:</p>
                 <div class="input-group mb-3">
@@ -75,6 +78,7 @@
                   </div>
                 </div>
               </div>
+
               <div id="category-section">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Category
@@ -85,20 +89,25 @@
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
               </div>
+
               <div id="income-section">
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                 </div>
                 <p>Income?</p>
               </div>
+
               <div class="input-group" id="note-input">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="note-label">Note</span>
                 </div>
                 <textarea class="form-control" id="note" aria-label="With textarea"></textarea>
               </div>
+
               <p>Date:</p>
+
               <button class="btn btn-secondary" id="submit-button" type="button" onclick="onTransactionSubmitClick()">Submit</button>
+
             </form>
           </div>
         </div>
