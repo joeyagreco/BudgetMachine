@@ -152,6 +152,10 @@ button {
     margin: 0;
 }
 
+#flexSwitchCheckDefault:hover {
+    cursor: pointer;
+}
+
 #note-input {
     display: flex;
     flex-direction: row;
@@ -168,4 +172,12 @@ button {
 
 #date-section {
     display: flex;
+}
+
+input[type=date] {
+    cursor: pointer;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
 }
