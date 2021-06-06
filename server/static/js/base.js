@@ -28,6 +28,7 @@ function onTransactionSubmitClick() {
 document.onreadystatechange = function() {
     if (document.readyState !== "complete") {
         startLoading();
+        $('.datepicker').datepicker();
     } else {
         stopLoading();
     }
