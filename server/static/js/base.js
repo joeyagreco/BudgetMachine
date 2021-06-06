@@ -21,6 +21,7 @@ function onTransactionClick() {
 function onTransactionCloseClick() {
     document.getElementById("transaction-form").style.display = "none";
     document.getElementById("form-background").style.display = "none";
+    setTransactionPopupToDefaultValues();
 }
 
 function onTransactionSubmitClick() {
@@ -43,6 +44,40 @@ function updateCategoryDropdown(category) {
     let button =  document.getElementById("category-button")
     button.value = category;
     button.innerText = category;
+}
+
+function setTransactionPopupToDefaultValues() {
+    // set amount to empty string
+    document.getElementById("amount-input").value = "";
+
+    // set category dropdown to "category"
+    // and remove any 'active' classes in dropdown
+    let activeElements = document.getElementsByClassName("active");
+    for(i=0; i<activeElements.length; i++) {
+        // check if this element has the class 'category-item' in its classlist
+        if(activeElements[i].classList.contains("category-item")) {
+            // then we want to remove the 'active' class
+            activeElements[i].classList.remove("active");
+        }
+    }
+    // update button text
+    let button =  document.getElementById("category-button")
+    button.value = "Category";
+    button.innerText = "Category";
+
+    // set income to false
+    document.getElementById("flexSwitchCheckDefault").checked=false;
+
+    // set note to empty string
+    document.getElementById("note").value = "";
+
+    // set date to current date
+    let date = new Date()
+    let dd = String(date.getDate()).padStart(2, '0');
+    let mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = date.getFullYear();
+    today = yyyy + "-" + mm + "-" +  dd;
+    document.getElementById("date-input").value = today;
 }
 
 document.onreadystatechange = function() {

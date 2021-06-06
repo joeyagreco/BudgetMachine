@@ -71,7 +71,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input type="text" class="form-control" id="amount-input" aria-label="Amount (to the nearest dollar)" placeholder="Amount">
+                  <input type="number" class="form-control" id="amount-input" aria-label="Amount (to the nearest dollar)" placeholder="Amount">
                   <div class="input-group-append">
                     <span class="input-group-text">.00</span>
                   </div>
@@ -79,9 +79,7 @@
               </div>
 
               <div id="category-section">
-                <button class="btn btn-secondary dropdown-toggle" id="category-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Category
-                </button>
+                <button class="btn btn-secondary dropdown-toggle" id="category-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   {% for category in categories %}
                     <a class="dropdown-item category-item" href="#" onclick="updateCategoryDropdown('{{category}}')" id="{{category}}">{{category}}</a>
