@@ -28,10 +28,27 @@ function onTransactionSubmitClick() {
     document.getElementById("form-background").style.display = "none";
 }
 
+function updateCategoryDropdown(category) {
+    // remove all 'active' classes from elements in the category dropdown
+    let activeElements = document.getElementsByClassName("active");
+    for(i=0; i<activeElements.length; i++) {
+        // check if this element has the class 'category-item' in its classlist
+        if(activeElements[i].classList.contains("category-item")) {
+            // then we want to remove the 'active' class
+            activeElements[i].classList.remove("active");
+        }
+    }
+    document.getElementById(category).classList.add("active");
+    // update button text
+    let button =  document.getElementById("category-button")
+    button.value = category;
+    button.innerText = category;
+
+}
+
 document.onreadystatechange = function() {
     if (document.readyState !== "complete") {
         startLoading();
-        $('.datepicker').datepicker();
     } else {
         stopLoading();
     }
