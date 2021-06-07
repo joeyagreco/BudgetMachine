@@ -7,7 +7,7 @@ class Category:
     RESTAURANT = "RESTAURANT"
     CLOTHING = "CLOTHING"
     GIFT = "GIFT"
-    CAR = "CAR"
+    CAR_UPGRADE = "CAR UPGRADE"
     NECESSITY = "NECESSITY"
     # QOL = Quality of Life
     QOL = "QOL"
@@ -15,5 +15,7 @@ class Category:
     RANDOM = "RANDOM"
     # INCOME CATAEGORIES
     PAYCHECK = "PAYCHECK"
+    # BOTH
+    VENMO = "VENMO"
 
 
