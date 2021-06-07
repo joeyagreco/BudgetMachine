@@ -50,6 +50,10 @@ body {
     justify-content: flex-start !important;
 }
 
+#navbar {
+    background-color: #426bff;
+}
+
 .nav-item {
     font-size: 1.2rem;
     color: black;
