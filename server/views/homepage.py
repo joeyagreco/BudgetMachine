@@ -14,5 +14,5 @@ def homepage():
     categories = sorted([value for name, value in vars(Category).items() if name.isupper()])
     currentDate = datetime.date.today()
     db = MongoDBClient()
-    db.getAllTransactions()
-    return render_template("homepage.html", categories=categories, currentDate=currentDate)
+    allTransactions = db.getAllTransactions()
+    return render_template("homepage.html", categories=categories, currentDate=currentDate, allTransactions=allTransactions)
