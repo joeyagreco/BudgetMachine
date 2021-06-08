@@ -35,7 +35,6 @@ function onTransactionSubmitClick() {
     const note = document.getElementById("note").value;
     const category = document.getElementById("category-button").value;
     const isIncome = document.getElementById("flexSwitchCheckDefault").checked.toString();
-    console.log(isIncome);
     const date = document.getElementById("date-input").value;
     // build data object
     const data = {"amount": amount, "note": note, "category": category, "isIncome": isIncome, "date": date}
@@ -104,7 +103,6 @@ function setTransactionPopupToDefaultValues() {
 function activateSubmitButtonIfValidInput() {
     const amount = document.getElementById("amount-input").value.replaceAll(/\s/g,'');
     const category = document.getElementById("category-button").innerText;
-    console.log(category);
     if(amount.length > 0 && category != "Category") {
         document.getElementById("submit-button").classList.remove("disabled");
     }

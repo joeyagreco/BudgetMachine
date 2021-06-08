@@ -1,5 +1,4 @@
 import os
-import random
 import uuid
 
 from dotenv import load_dotenv
@@ -11,7 +10,7 @@ from server.models.Transaction import Transaction
 load_dotenv()
 
 
-class DatabaseClient:
+class MongoDBClient:
     """
     This class is used to connect directly to the Mongo Database.
     """
