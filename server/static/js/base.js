@@ -30,8 +30,21 @@ function onTransactionCloseClick() {
 }
 
 function onTransactionSubmitClick() {
+    // get data from html
+    const amount = document.getElementById("amount-input").value;
+    const note = document.getElementById("note").value;
+    const category = document.getElementById("category-button").value;
+    const isIncome = document.getElementById("flexSwitchCheckDefault").checked.toString();
+    console.log(isIncome);
+    const date = document.getElementById("date-input").value;
+    // build data object
+    const data = {"amount": amount, "note": note, "category": category, "isIncome": isIncome, "date": date}
     // send POST request
-    var fetchPromise = post("/add-transaction");
+    let fetchPromise = post("/add-transaction", data);
+    // redirect
+    fetchPromise.then(response => {
+      window.location.href = response.url;
+    });
 }
 
 function updateCategoryDropdown(category) {
