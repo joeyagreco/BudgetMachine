@@ -40,7 +40,6 @@ function onTransactionSubmitClick() {
     const data = {"amount": amount, "note": note, "category": category, "isIncome": isIncome, "date": date}
     // send POST request
     let fetchPromise = post("/add-transaction", data);
-    // redirect
     fetchPromise.then(response => {
       window.location.href = response.url;
     });

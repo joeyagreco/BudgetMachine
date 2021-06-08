@@ -12,4 +12,4 @@ def homepage():
     print(f"get homepage -- {randint(1,100)}")
     categories = sorted([value for name, value in vars(Category).items() if name.isupper()])
     currentDate = datetime.date.today()
-    return render_template("base.html", categories=categories, currentDate=currentDate)
+    return render_template("homepage.html", categories=categories, currentDate=currentDate)
