@@ -1,3 +1,8 @@
+// method for sending POST requests
+window.post = function(url, data) {
+    return fetch(url, {method: "POST", body: JSON.stringify(data)});
+}
+
 function reloadPage() {
     location.reload();
 }
@@ -25,8 +30,8 @@ function onTransactionCloseClick() {
 }
 
 function onTransactionSubmitClick() {
-    document.getElementById("transaction-form").style.display = "none";
-    document.getElementById("form-background").style.display = "none";
+    // send POST request
+    var fetchPromise = post("/add-transaction");
 }
 
 function updateCategoryDropdown(category) {
