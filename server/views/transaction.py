@@ -20,4 +20,4 @@ def addTransaction():
     # write to database
     mongoClient = MongoDBClient()
     mongoClient.addTransaction(dataDict["amount"], dataDict["note"], dataDict["category"], dataDict["isIncome"], dataDict["date"])
-    return redirect(url_for("homepage"))
+    return redirect(url_for("homepage"), code=307)
