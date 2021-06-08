@@ -1,5 +1,6 @@
 import os
 import uuid
+from typing import List
 
 from dotenv import load_dotenv
 from pymongo import MongoClient
@@ -29,6 +30,13 @@ class MongoDBClient:
             newId = uuid.uuid1()
         return newId.hex
 
+    def __mapToTransaction(self, data: dict) -> Transaction:
+        """
+        Maps the given data to a Transaction and returns it.
+        """
+        return Transaction(data["_id"], data["amount"], data["note"], data["category"],
+                           data["isIncome"], data["date"].date())
+
     def getTransaction(self, transactionId: str) -> Transaction:
         """
         Returns a dictionary object of the league or an Error object if not retrieved
@@ -37,8 +45,7 @@ class MongoDBClient:
         response = self.__collection.find_one({"_id": transactionId})
         # response will be None if not found
         if response:
-            return Transaction(response["_id"], response["amount"], response["note"], response["category"],
-                               response["isIncome"], response["date"].date())
+            return self.__mapToTransaction(response)
         else:
             # TODO return Error(f"Could not find a transaction with ID: {transactionId}")
             return None
@@ -98,3 +105,13 @@ class MongoDBClient:
         else:
             # could not delete the league
             return False
+
+    def getAllTransactions(self) -> List[Transaction]:
+        """
+        Returns a list of all Transaction objects
+        """
+        cursor = self.__collection.find({})
+        allTransactions = list()
+        for document in cursor:
+            allTransactions.append(self.__mapToTransaction(document))
+        return allTransactions
