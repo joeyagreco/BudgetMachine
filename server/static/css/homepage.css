@@ -1,0 +1,39 @@
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dataTables_wrapper {
+    width: 95% !important;
+}
+
+#transactionsTable {
+    width: 100% !important;
+    font-size: 120%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#transactionsTable th {
+    font-size: 85%;
+    overflow: hidden;
+}
+
+table, th, td {
+  border: 2px solid black !important;
+}
+
+.transactionsTable td {
+    white-space: nowrap;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.transactionsTable tr {
+    background-color: #a3a3a3;
+}

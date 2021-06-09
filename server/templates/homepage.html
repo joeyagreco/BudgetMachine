@@ -23,13 +23,14 @@
 {% endblock %}
 
 {% block content %}
-        <table class="table table-fluid statsTable compact" id="transactionsTable">
+    <div class="content">
+        <table class="table table-fluid transactionsTable compact" id="transactionsTable">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Amount</th>
-                    <th>Note</th>
                     <th>Category</th>
+                    <th>Note</th>
                     <th>Income</th>
                     <th>Date</th>
                 </tr>
@@ -39,15 +40,13 @@
                     <tr>
                         <td>{{transaction.getTId()}}</td>
                         <td>{{transaction.getAmount()}}</td>
-                        <td>{{transaction.getNote()}}</td>
                         <td>{{transaction.getCategory()}}</td>
+                        <td>{{transaction.getNote()}}</td>
                         <td>{{transaction.getIsIncome()}}</td>
                         <td>{{transaction.getDate()}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-<script>
-    initializeTable();
-</script>
+    </div>
 {% endblock %}

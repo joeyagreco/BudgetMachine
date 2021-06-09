@@ -10,3 +10,5 @@ function initializeTable() {
         );
     } );
 }
+
+window.onload = initializeTable();
