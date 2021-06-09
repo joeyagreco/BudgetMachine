@@ -4,7 +4,7 @@ function initializeTable() {
             {
                 "order": [[ 5, "desc" ]],
                 "searching": false,
-                "iDisplayLength": 10,
+                "iDisplayLength": 25,
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
             }
         );
