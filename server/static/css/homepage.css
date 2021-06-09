@@ -7,6 +7,14 @@
     align-items: center;
 }
 
+.id-header {
+    display: none;
+}
+
+.id-content {
+    display: none;
+}
+
 .dataTables_wrapper {
     width: 95% !important;
 }

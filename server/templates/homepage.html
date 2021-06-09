@@ -27,7 +27,7 @@
         <table class="table table-fluid transactionsTable compact" id="transactionsTable">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th class="id-header">ID</th>
                     <th>Amount</th>
                     <th>Category</th>
                     <th>Note</th>
@@ -38,7 +38,7 @@
             <tbody>
                 {% for transaction in allTransactions %}
                     <tr>
-                        <td>{{transaction.getTId()}}</td>
+                        <td class="id-content">{{transaction.getTId()}}</td>
                         <td>{{transaction.getAmount()}}</td>
                         <td>{{transaction.getCategory()}}</td>
                         <td>{{transaction.getNote()}}</td>
