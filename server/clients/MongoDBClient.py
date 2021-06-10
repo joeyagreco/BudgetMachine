@@ -8,6 +8,7 @@ from datetime import datetime
 import winreg
 
 from server.models.Transaction import Transaction
+from server.util import YamlProcessor
 
 load_dotenv()
 
@@ -21,10 +22,10 @@ class MongoDBClient:
         self.__cluster = MongoClient(os.getenv("MONGO_CLUSTER_URL"))
         self.__database = self.__cluster[os.getenv("MONGO_DATABASE")]
         # check if we want TEST or PROD data
-        if os.getenv("TEST_ENVIRONMENT") == "true":
-            self.__collection = self.__database[os.getenv("MONGO_COLLECTION_TEST")]
-        else:
+        self.__collection = self.__database[os.getenv("MONGO_COLLECTION_TEST")]
+        if YamlProcessor.getVariable("PRODUCTION_DATA"):
             self.__collection = self.__database[os.getenv("MONGO_COLLECTION_PROD")]
+
 
     def __generateId(self) -> str:
         """
