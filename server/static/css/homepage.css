@@ -7,6 +7,13 @@
     align-items: center;
 }
 
+.switch-container {
+    width: 90%;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: row;
+}
+
 .id-header {
     display: none;
 }
