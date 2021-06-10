@@ -12,3 +12,9 @@ function initializeTable() {
 }
 
 window.onload = initializeTable();
+
+function onEnvironmentSwitchClick() {
+    // check if checkbox is checked or not then send to route
+    let checked = document.getElementById("environment-switch").checked;
+    window.location = "/update-data-environment?checked=" + checked;
+}

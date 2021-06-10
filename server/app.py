@@ -6,4 +6,5 @@ if __name__ == "__main__":
     from views.homepage import *
     from views.favicon import *
     from views.transaction import *
+    from views.config import *
     app.run(debug=True)

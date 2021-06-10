@@ -13,7 +13,7 @@ def getVariables() -> dict:
         return yaml.safe_load(file)
 
 
-def addVariable(key: str, value):
+def addUpdateVariable(key: str, value):
     allVars = getVariables()
     with open(__getPathOfYamlFile(), 'w') as file:
         allVars[key] = value
