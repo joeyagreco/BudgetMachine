@@ -5,6 +5,7 @@ from typing import List
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from datetime import datetime
+import winreg
 
 from server.models.Transaction import Transaction
 
@@ -19,7 +20,11 @@ class MongoDBClient:
     def __init__(self):
         self.__cluster = MongoClient(os.getenv("MONGO_CLUSTER_URL"))
         self.__database = self.__cluster[os.getenv("MONGO_DATABASE")]
-        self.__collection = self.__database[os.getenv("MONGO_COLLECTION_TEST")]
+        # check if we want TEST or PROD data
+        if os.getenv("TEST_ENVIRONMENT") == "true":
+            self.__collection = self.__database[os.getenv("MONGO_COLLECTION_TEST")]
+        else:
+            self.__collection = self.__database[os.getenv("MONGO_COLLECTION_PROD")]
 
     def __generateId(self) -> str:
         """

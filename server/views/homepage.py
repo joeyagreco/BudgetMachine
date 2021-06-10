@@ -13,6 +13,6 @@ def homepage():
     print(f"get homepage -- {randint(1,100)}")
     categories = sorted([value for name, value in vars(Category).items() if name.isupper()])
     currentDate = datetime.date.today()
-    db = MongoDBClient()
-    allTransactions = db.getAllTransactions()
+    mongoDbClient = MongoDBClient()
+    allTransactions = mongoDbClient.getAllTransactions()
     return render_template("homepage.html", categories=categories, currentDate=currentDate, allTransactions=allTransactions)
