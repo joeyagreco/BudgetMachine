@@ -19,7 +19,7 @@ class MongoDBClient:
     def __init__(self):
         self.__cluster = MongoClient(os.getenv("MONGO_CLUSTER_URL"))
         self.__database = self.__cluster[os.getenv("MONGO_DATABASE")]
-        self.__collection = self.__database[os.getenv("MONGO_COLLECTION")]
+        self.__collection = self.__database[os.getenv("MONGO_COLLECTION_TEST")]
 
     def __generateId(self) -> str:
         """
