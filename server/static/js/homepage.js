@@ -11,10 +11,19 @@ function initializeTable() {
     } );
 }
 
-window.onload = initializeTable();
+function setEnvironmentSwitch() {
+    let envSwitch = document.getElementById("environment-switch");
+    envSwitch.checked = envSwitch.dataset.checked == "True";
+}
 
 function onEnvironmentSwitchClick() {
     // check if checkbox is checked or not then send to route
     let checked = document.getElementById("environment-switch").checked;
     window.location = "/update-data-environment?checked=" + checked;
+}
+
+function init() {
+    // runs all methods that need to be ran on page load
+    initializeTable();
+    setEnvironmentSwitch();
 }

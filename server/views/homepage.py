@@ -6,6 +6,7 @@ from flask import render_template
 from server.app import app
 from server.clients.MongoDBClient import MongoDBClient
 from server.enums.Category import Category
+from server.util import YamlProcessor
 
 
 @app.route('/')
@@ -15,4 +16,6 @@ def homepage():
     currentDate = datetime.date.today()
     mongoDbClient = MongoDBClient()
     allTransactions = mongoDbClient.getAllTransactions()
-    return render_template("homepage.html", categories=categories, currentDate=currentDate, allTransactions=allTransactions)
+    productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
+    print(f"loading page with {productionData}")
+    return render_template("homepage.html", categories=categories, currentDate=currentDate, allTransactions=allTransactions, productionData=productionData)

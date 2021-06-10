@@ -6,6 +6,6 @@ from server.util import YamlProcessor
 
 @app.route('/update-data-environment')
 def updateDataEnvironment():
-    checked = bool(request.args.get("checked"))
+    checked = request.args.get("checked") == "true"
     YamlProcessor.addUpdateVariable("PRODUCTION_DATA", checked)
     return redirect(url_for("homepage"))
