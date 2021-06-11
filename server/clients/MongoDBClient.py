@@ -26,7 +26,6 @@ class MongoDBClient:
         if YamlProcessor.getVariable("PRODUCTION_DATA"):
             self.__collection = self.__database[os.getenv("MONGO_COLLECTION_PROD")]
 
-
     def __generateId(self) -> str:
         """
         Returns a new and unused random id
@@ -112,11 +111,14 @@ class MongoDBClient:
             # could not delete the league
             return False
 
-    def getAllTransactions(self) -> List[Transaction]:
+    def getAllTransactions(self, **params) -> List[Transaction]:
         """
         Returns a list of all Transaction objects
+        PARAMS:
+        LIMIT: int: Limits the amount of entries returned {DEFAULT: 0}
         """
-        cursor = self.__collection.find({})
+        limit = params.get("limit", 0)
+        cursor = self.__collection.find({}).limit(limit)
         allTransactions = list()
         for document in cursor:
             allTransactions.append(self.__mapToTransaction(document))

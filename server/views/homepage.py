@@ -14,6 +14,6 @@ def homepage():
     categories = sorted([value for name, value in vars(Category).items() if name.isupper()])
     currentDate = datetime.date.today()
     mongoDbClient = MongoDBClient()
-    allTransactions = mongoDbClient.getAllTransactions()
+    allTransactions = mongoDbClient.getAllTransactions(limit=100)
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
     return render_template("homepage.html", categories=categories, currentDate=currentDate, allTransactions=allTransactions, productionData=productionData)
