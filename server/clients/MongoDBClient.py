@@ -7,6 +7,7 @@ from pymongo import MongoClient
 from datetime import datetime
 
 from server.models.Bank import Bank
+from server.models.Month import Month
 from server.models.Transaction import Transaction
 from server.models.Year import Year
 from server.util import YamlProcessor
@@ -51,15 +52,16 @@ class MongoDBClient:
         """
         Maps the given data to a Year and returns it.
         """
-        bankWrappers = dict()
-        for month in data["bankWrappers"].keys():
-            # bankWrapper =
-            # for bank in bank
-            banks = list()
-            bank = data["bankWrappers"][month]
-            banks.append(Bank(bank["amount"], bank["category"]))
+        months = list()
+        for month in data["months"]:
+            banks = month["banks"]
+            bankList = list()
+            for bank in banks:
+                bankList.append(Bank(bank["amount"], bank["category"]))
+            monthObj = Month(month["month"], bankList)
+            months.append(monthObj)
 
-        return Year(data["_id"], data["year"], bankWrappers)
+        return Year(data["_id"], data["year"], months)
 
     def getTransaction(self, transactionId: str, **params) -> Transaction:
         """
