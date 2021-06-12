@@ -21,3 +21,12 @@ def addTransaction():
     mongoClient = MongoDBClient()
     mongoClient.addTransaction(dataDict["amount"], dataDict["note"], dataDict["category"], dataDict["isIncome"], dataDict["date"])
     return redirect(url_for("homepage"))
+
+@app.route('/delete-transaction', methods=["GET"])
+def deleteTransaction():
+    print("deleting transaction")
+    tId = request.args.get("tId")
+    # update in database
+    mongoClient = MongoDBClient()
+    mongoClient.deleteTransaction(tId)
+    return redirect(url_for("homepage"))
