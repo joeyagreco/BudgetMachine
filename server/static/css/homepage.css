@@ -36,8 +36,13 @@
     text-align: center;
 }
 
-.category-bank-input{
+.category-bank-input {
     text-align: center;
+}
+
+.category-bank-remaining-balance {
+    text-align: center;
+    font-size: 20px;
 }
 
 .id-header {
