@@ -34,6 +34,9 @@ function openTransaction(tId) {
     }
     document.getElementById("note").value = document.getElementById("transaction-note-" + tId).innerHTML;
     document.getElementById("date-input").value = document.getElementById("transaction-date-" + tId).innerHTML;
+    // make submit button clickable
+    document.getElementById("submit-button").classList.remove("disabled");
+    document.getElementById("delete-button").style.display = "inline-block";
 }
 
 function init() {

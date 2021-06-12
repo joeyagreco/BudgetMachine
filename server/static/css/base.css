@@ -197,6 +197,19 @@ input::-webkit-inner-spin-button {
     display: flex;
 }
 
+.button-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#delete-button {
+    display: none;
+    margin-right: 5px;
+    background-color: red;
+}
+
 input[type=date] {
     cursor: pointer;
 }

@@ -26,6 +26,7 @@ function onTransactionClick() {
 function onTransactionCloseClick() {
     document.getElementById("transaction-form").style.display = "none";
     document.getElementById("form-background").style.display = "none";
+    document.getElementById("delete-button").style.display = "none";
     setTransactionPopupToDefaultValues();
 }
 
