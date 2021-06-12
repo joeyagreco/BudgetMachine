@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 from datetime import datetime
 
+from server.models.Bank import Bank
 from server.models.Transaction import Transaction
 from server.models.Year import Year
 from server.util import YamlProcessor
@@ -37,12 +38,28 @@ class MongoDBClient:
             newId = uuid.uuid1()
         return newId.hex
 
-    def __mapToTransaction(self, data: dict) -> Transaction:
+    @staticmethod
+    def __mapToTransaction(data: dict) -> Transaction:
         """
         Maps the given data to a Transaction and returns it.
         """
         return Transaction(data["_id"], data["amount"], data["note"], data["category"],
                            data["isIncome"], data["date"].date())
+
+    @staticmethod
+    def __mapToYear(data: dict) -> Year:
+        """
+        Maps the given data to a Year and returns it.
+        """
+        bankWrappers = dict()
+        for month in data["bankWrappers"].keys():
+            # bankWrapper =
+            # for bank in bank
+            banks = list()
+            bank = data["bankWrappers"][month]
+            banks.append(Bank(bank["amount"], bank["category"]))
+
+        return Year(data["_id"], data["year"], bankWrappers)
 
     def getTransaction(self, transactionId: str, **params) -> Transaction:
         """
@@ -139,23 +156,38 @@ class MongoDBClient:
        Returns the new Year's ID or an Error object if not inserted
        https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
        """
-        bankWrappers = dict()
-        # unwrap all BankWrappers and put them into a dict
-        for month in year.getBankWrappers().keys():
+        months = list()
+        # unwrap all Months and put them into a dict
+        for month in year.getMonths():
+            monthDict = dict()
             # unwrap all Banks and put them into a list
             banks = list()
-            for bank in year.getBankWrappers()[month].getBanks():
+            for bank in month.getBanks():
                 bankDict = dict()
                 bankDict["amount"] = bank.getAmount()
                 bankDict["category"] = bank.getCategory()
                 banks.append(bankDict)
-            bankWrappers["banks"] = banks
-            bankWrappers["month"] = month
+            monthDict["month"] = month.getMonth()
+            monthDict["banks"] = banks
+            months.append(monthDict)
         # construct default Year object
-        year = {"_id": self.__generateId(), "year": year.getYear(), "bankWrappers": bankWrappers}
+        year = {"_id": self.__generateId(), "year": year.getYear(), "months": months}
         response = self.__yearCollection.insert_one(year)
         if response.acknowledged:
             return response.inserted_id
         else:
             # TODO return Error("Could not insert Year into database.")
             return "error"
+
+    def getAllYears(self, **params) -> List[Year]:
+        """
+        Returns a list of all Year objects
+        PARAMS:
+        LIMIT: int: Limits the amount of entries returned {DEFAULT: 0}
+        """
+        limit = params.get("limit", 0)
+        cursor = self.__yearCollection.find({}).limit(limit)
+        allYears = list()
+        for document in cursor:
+            allYears.append(self.__mapToYear(document))
+        return allYears

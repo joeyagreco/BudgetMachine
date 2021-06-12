@@ -1,13 +1,13 @@
-from typing import Dict
+from typing import List
 
-from server.models.BankWrapper import BankWrapper
+from server.models.Month import Month
 
 
 class Year:
-    def __init__(self, yId: str, year: int, bankWrappers: Dict[str, BankWrapper]):
+    def __init__(self, yId: str, year: int, months: List[Month]):
         self.__yId = yId
         self.__year = year
-        self.__bankWrappers = bankWrappers
+        self.__months = months
 
     def getYId(self):
         return self.__yId
@@ -15,5 +15,5 @@ class Year:
     def getYear(self):
         return self.__year
 
-    def getBankWrappers(self):
-        return self.__bankWrappers
+    def getMonths(self):
+        return self.__months

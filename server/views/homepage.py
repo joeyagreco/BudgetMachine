@@ -16,5 +16,6 @@ def homepage():
     currentDate = datetime.date.today()
     mongoDbClient = MongoDBClient()
     allTransactions = mongoDbClient.getAllTransactions(limit=100)
+    allYears = mongoDbClient.getAllYears()
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
     return render_template("homepage.html", categories=categories, currentDate=currentDate, allTransactions=allTransactions, productionData=productionData)
