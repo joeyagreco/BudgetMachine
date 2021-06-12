@@ -22,9 +22,9 @@ class MongoDBClient:
         self.__cluster = MongoClient(os.getenv("MONGO_CLUSTER_URL"))
         self.__database = self.__cluster[os.getenv("MONGO_DATABASE")]
         # check if we want TEST or PROD data
-        self.__collection = self.__database[os.getenv("MONGO_COLLECTION_TEST")]
+        self.__collection = self.__database[os.getenv("MONGO_COLLECTION_TRANSACTIONS_TEST")]
         if YamlProcessor.getVariable("PRODUCTION_DATA"):
-            self.__collection = self.__database[os.getenv("MONGO_COLLECTION_PROD")]
+            self.__collection = self.__database[os.getenv("MONGO_COLLECTION_TRANSACTIONS_PROD")]
 
     def __generateId(self) -> str:
         """
@@ -130,3 +130,18 @@ class MongoDBClient:
         for document in cursor:
             allTransactions.append(self.__mapToTransaction(document))
         return allTransactions
+
+    def addBank(self, year: int, month: int):
+        """
+       Adds a bank with a new generated ID to the database
+       Returns the new transaction's ID or an Error object if not inserted
+       https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
+       """
+        # construct default transaction object
+        bank = {"_id": self.__generateId(), "year": year, "month": month}
+        response = self.__collection.insert_one(bank)
+        if response.acknowledged:
+            return response.inserted_id
+        else:
+            # TODO return Error("Could not insert transaction into database.")
+            return "error"
