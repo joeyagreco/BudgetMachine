@@ -53,6 +53,11 @@
     display: none;
 }
 
+.transaction-row:hover {
+    cursor: pointer;
+    background-color: #D7D7D7;
+}
+
 .dataTables_wrapper {
     width: 95% !important;
 }

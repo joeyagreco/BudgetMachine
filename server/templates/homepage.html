@@ -52,13 +52,13 @@
             </thead>
             <tbody>
                 {% for transaction in allTransactions %}
-                    <tr>
-                        <td class="id-content">{{transaction.getTId()}}</td>
-                        <td>{{transaction.getAmount()}}</td>
-                        <td>{{transaction.getCategory()}}</td>
-                        <td>{{transaction.getNote()}}</td>
-                        <td>{{transaction.getIsIncome()}}</td>
-                        <td>{{transaction.getDate()}}</td>
+                    <tr class="transaction-row" onclick="openTransaction('{{transaction.getTId()}}')">
+                        <td class="id-content" id="transaction-id-{{transaction.getTId()}}">{{transaction.getTId()}}</td>
+                        <td id="transaction-amount-{{transaction.getTId()}}">{{transaction.getAmount()}}</td>
+                        <td id="transaction-category-{{transaction.getTId()}}">{{transaction.getCategory()}}</td>
+                        <td id="transaction-note-{{transaction.getTId()}}">{{transaction.getNote()}}</td>
+                        <td id="transaction-isIncome-{{transaction.getTId()}}">{{transaction.getIsIncome()}}</td>
+                        <td id="transaction-date-{{transaction.getTId()}}">{{transaction.getDate()}}</td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -21,6 +21,21 @@ function onEnvironmentSwitchClick() {
     window.location = "/update-data-environment?checked=" + checked;
 }
 
+function openTransaction(tId) {
+    onTransactionClick();
+    // populate transaction form with appropriate values
+    document.getElementById("amount-input").value = document.getElementById("transaction-amount-" + tId).innerHTML;
+    let category = document.getElementById("transaction-category-" + tId).innerHTML
+    document.getElementById("category-button").innerHTML = category;
+    // set dropdown to be selected
+    document.getElementById(category).classList.add("active");
+    if(document.getElementById("transaction-isIncome-" + tId).innerHTML == "True") {
+        document.getElementById("flexSwitchCheckDefault").checked = "True";
+    }
+    document.getElementById("note").value = document.getElementById("transaction-note-" + tId).innerHTML;
+    document.getElementById("date-input").value = document.getElementById("transaction-date-" + tId).innerHTML;
+}
+
 function init() {
     // runs all methods that need to be ran on page load
     initializeTable();
