@@ -7,6 +7,7 @@ from pymongo import MongoClient
 from datetime import datetime
 import winreg
 
+from server.models.Bank import Bank
 from server.models.Transaction import Transaction
 from server.util import YamlProcessor
 
@@ -131,14 +132,14 @@ class MongoDBClient:
             allTransactions.append(self.__mapToTransaction(document))
         return allTransactions
 
-    def addBank(self, year: int, month: int):
+    def addBank(self, bank: Bank):
         """
        Adds a bank with a new generated ID to the database
        Returns the new transaction's ID or an Error object if not inserted
        https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
        """
-        # construct default transaction object
-        bank = {"_id": self.__generateId(), "year": year, "month": month}
+        # construct default bank object
+        bank = {"_id": self.__generateId(), "amount": bank.getAmount(), "category": bank.getCategory(), "year": bank.getYear(), "month": bank.getMonth()}
         response = self.__collection.insert_one(bank)
         if response.acknowledged:
             return response.inserted_id

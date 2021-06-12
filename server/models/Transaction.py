@@ -2,7 +2,7 @@ from datetime import datetime
 
 
 class Transaction:
-    def __init__(self, tId: str, amount: float, note: str, category: str, isIncome: bool, date: datetime.date):
+    def __init__(self, tId: str, amount: int, note: str, category: str, isIncome: bool, date: datetime.date):
         self.__tId = tId
         self.__amount = amount
         self.__note = note
