@@ -30,6 +30,14 @@
             </div>
             <p>PRODUCTION DATA</p>
         </div>
+        <div class="category-banks-section">
+            {% for category in categories %}
+                <div class="category-bank">
+                    <div class="category-bank-title">{{category}}</div>
+                    <input class="form-control category-bank-input" type="number" placeholder="$" step="1" autocomplete="off">
+                </div>
+            {% endfor %}
+        </div>
         <table class="table table-fluid transactionsTable compact" id="transactionsTable">
             <thead>
                 <tr>

@@ -18,6 +18,28 @@
     cursor: pointer;
 }
 
+.category-banks-section {
+    width: 100%;
+    background-color: pink;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 40px 50px 40px;
+}
+
+.category-bank {
+    background-color: green;
+}
+
+.category-bank-title {
+    font-size: 25px;
+    text-align: center;
+}
+
+.category-bank-input{
+    text-align: center;
+}
+
 .id-header {
     display: none;
 }
