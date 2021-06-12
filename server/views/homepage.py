@@ -1,5 +1,4 @@
 import datetime
-from random import randint
 
 from flask import render_template
 
@@ -17,5 +16,8 @@ def homepage():
     mongoDbClient = MongoDBClient()
     allTransactions = mongoDbClient.getAllTransactions(limit=100)
     allYears = mongoDbClient.getAllYears()
+    selectedYear = allYears[0].getYear()
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
-    return render_template("homepage.html", categories=categories, currentDate=currentDate, allTransactions=allTransactions, productionData=productionData)
+    return render_template("homepage.html", categories=categories, currentDate=currentDate,
+                           allTransactions=allTransactions, productionData=productionData,
+                           selected_year=selectedYear, years=allYears)

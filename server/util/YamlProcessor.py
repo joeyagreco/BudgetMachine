@@ -3,7 +3,7 @@ import os
 
 
 def __getPathOfYamlFile():
-    return os.path.abspath(os.getcwd()) + r'\config.yaml'
+    return os.getenv("CONFIG_YAML_PATH")
 
 
 def getVariables() -> dict:

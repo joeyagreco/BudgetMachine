@@ -39,9 +39,9 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for year in years|sort %}
                         {% if year == selected_year %}
-                            <a class="dropdown-item active" href="#" onclick="">{{year}}</a>
+                            <a class="dropdown-item active" href="#" onclick="">{{year.getYear()}}</a>
                         {% else %}
-                            <a class="dropdown-item" href="#" onclick="">{{year}}</a>
+                            <a class="dropdown-item" href="#" onclick="">{{year.getYear()}}</a>
                         {% endif %}
                     {% endfor %}
                 </div>
