@@ -34,9 +34,11 @@ function onTransactionDeleteClick() {
     window.location = "delete-transaction?tId=" + getCurrentTransactionId();
 }
 
-function openTransaction(tId) {
+function onTransactionOpenClick(tId) {
     setCurrentTransactionId(tId);
     onTransactionClick();
+    // update submit button to say "update"
+    document.getElementById("submit-button").innerHTML = "Update";
     // populate transaction form with appropriate values
     document.getElementById("amount-input").value = document.getElementById("transaction-amount-" + tId).innerHTML;
     let category = document.getElementById("transaction-category-" + tId).innerHTML

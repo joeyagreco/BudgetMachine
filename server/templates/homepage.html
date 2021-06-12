@@ -52,7 +52,7 @@
             </thead>
             <tbody>
                 {% for transaction in allTransactions %}
-                    <tr class="transaction-row" onclick="openTransaction('{{transaction.getTId()}}')">
+                    <tr class="transaction-row" onclick="onTransactionOpenClick('{{transaction.getTId()}}')">
                         <td class="id-content" id="transaction-id-{{transaction.getTId()}}">{{transaction.getTId()}}</td>
                         <td id="transaction-amount-{{transaction.getTId()}}">{{transaction.getAmount()}}</td>
                         <td id="transaction-category-{{transaction.getTId()}}">{{transaction.getCategory()}}</td>

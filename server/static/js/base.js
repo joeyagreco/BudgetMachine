@@ -27,6 +27,8 @@ function onTransactionCloseClick() {
     document.getElementById("transaction-form").style.display = "none";
     document.getElementById("form-background").style.display = "none";
     document.getElementById("delete-button").style.display = "none";
+    document.getElementById("submit-button").classList.add("disabled");
+    document.getElementById("submit-button").innerHTML = "Submit";
     setTransactionPopupToDefaultValues();
 }
 
@@ -34,7 +36,7 @@ function onTransactionSubmitClick() {
     // get data from html
     const amount = document.getElementById("amount-input").value;
     const note = document.getElementById("note").value;
-    const category = document.getElementById("category-button").value;
+    const category = document.getElementById("category-button").innerHTML;
     const isIncome = document.getElementById("flexSwitchCheckDefault").checked.toString();
     const date = document.getElementById("date-input").value;
     // build data object
