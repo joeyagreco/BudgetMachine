@@ -42,15 +42,18 @@ class MongoDBClient:
         return Transaction(data["_id"], data["amount"], data["note"], data["category"],
                            data["isIncome"], data["date"].date())
 
-    def getTransaction(self, transactionId: str) -> Transaction:
+    def getTransaction(self, transactionId: str, **params) -> Transaction:
         """
         Returns a dictionary object of the league or an Error object if not retrieved
         https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
+        PARAMS:
+        NOMAP: bool: If True, will not map response to a Transaction object {Default: false}
         """
+        noMap = params.get("noMap", False)
         response = self.__collection.find_one({"_id": transactionId})
         # response will be None if not found
         if response:
-            return self.__mapToTransaction(response)
+            return response if noMap else self.__mapToTransaction(response)
         else:
             # TODO return Error(f"Could not find a transaction with ID: {transactionId}")
             return None
@@ -78,23 +81,27 @@ class MongoDBClient:
             # TODO return Error("Could not insert transaction into database.")
             return "error"
 
-    def updateTransaction(self, transactionId: str, newNote: str):
+    def updateTransaction(self, updatedTransaction: Transaction):
         """
         Updates a transaction with given id
         Returns a Document object or an Error object if not updated
         https://docs.mongodb.com/manual/reference/method/db.collection.update/
         https://specify.io/how-tos/mongodb-update-documents
         """
-        transaction = self.getTransaction(transactionId)
+        transaction = self.getTransaction(updatedTransaction.getTId(), noMap=True)
         if not transaction:
             return None
         else:
-            transaction["note"] = newNote
-            response = self.__collection.update({"_id": transactionId}, transaction)
+            transaction["amount"] = updatedTransaction.getAmount()
+            transaction["category"] = updatedTransaction.getCategory()
+            transaction["note"] = updatedTransaction.getNote()
+            transaction["isIncome"] = updatedTransaction.getIsIncome()
+            transaction["date"] = datetime.combine(updatedTransaction.getDate(), datetime.max.time())
+            response = self.__collection.update({"_id": updatedTransaction.getTId()}, transaction)
             if response:
                 return response
             else:
-                # TODO return Error("Could not update league.")
+                # TODO return Error("Could not update transaction.")
                 return None
 
     def deleteTransaction(self, transactionId: str) -> bool:

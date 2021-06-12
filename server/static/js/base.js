@@ -33,6 +33,15 @@ function onTransactionCloseClick() {
 }
 
 function onTransactionSubmitClick() {
+    // first, check if this is a submit (add new) or update (update existing)
+    if(document.getElementById("submit-button").innerHTML == "Submit") {
+        submitTransaction();
+    } else {
+        updateTransaction();
+    }
+}
+
+function submitTransaction() {
     // get data from html
     const amount = document.getElementById("amount-input").value;
     const note = document.getElementById("note").value;
@@ -43,6 +52,23 @@ function onTransactionSubmitClick() {
     const data = {"amount": amount, "note": note, "category": category, "isIncome": isIncome, "date": date}
     // send POST request
     let fetchPromise = post("/add-transaction", data);
+    fetchPromise.then(response => {
+      window.location.href = response.url;
+    });
+}
+
+function updateTransaction() {
+    // get data from html
+    const tId = getCurrentTransactionId();
+    const amount = document.getElementById("amount-input").value;
+    const note = document.getElementById("note").value;
+    const category = document.getElementById("category-button").innerHTML;
+    const isIncome = document.getElementById("flexSwitchCheckDefault").checked.toString();
+    const date = document.getElementById("date-input").value;
+    // build data object
+    const data = {"tId": tId, "amount": amount, "note": note, "category": category, "isIncome": isIncome, "date": date}
+    // send POST request
+    let fetchPromise = post("/update-transaction", data);
     fetchPromise.then(response => {
       window.location.href = response.url;
     });
