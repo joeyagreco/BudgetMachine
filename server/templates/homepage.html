@@ -30,6 +30,24 @@
             </div>
             <p>PRODUCTION DATA</p>
         </div>
+
+        <div class="date-dropdowns">
+            <div class="yearDropdown">
+                <button class="btn btn-secondary dropdown-toggle" id="select_year_button" type="button" value="{{bankWrapper.getYear()}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{bankWrapper.getYear()}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% for year in league.years.keys()|sort %}
+                        {% if year == selected_year %}
+                            <a class="dropdown-item active" href="#" onclick="">{{selected_year}}</a>
+                        {% else %}
+                            <a class="dropdown-item" href="#" onclick="submitLeagueStat({{year}}, '{{selected_stat}}')">{{year}}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
         <div class="category-banks-section">
             {% for category in categories %}
                 <div class="category-bank">

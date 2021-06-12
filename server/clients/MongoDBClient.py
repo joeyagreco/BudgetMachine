@@ -5,10 +5,9 @@ from typing import List
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from datetime import datetime
-import winreg
 
-from server.models.Bank import Bank
 from server.models.Transaction import Transaction
+from server.models.Year import Year
 from server.util import YamlProcessor
 
 load_dotenv()
@@ -23,16 +22,18 @@ class MongoDBClient:
         self.__cluster = MongoClient(os.getenv("MONGO_CLUSTER_URL"))
         self.__database = self.__cluster[os.getenv("MONGO_DATABASE")]
         # check if we want TEST or PROD data
-        self.__collection = self.__database[os.getenv("MONGO_COLLECTION_TRANSACTIONS_TEST")]
+        self.__transactionCollection = self.__database[os.getenv("MONGO_COLLECTION_TRANSACTIONS_TEST")]
+        self.__yearCollection = self.__database[os.getenv("MONGO_COLLECTION_YEARS_TEST")]
         if YamlProcessor.getVariable("PRODUCTION_DATA"):
-            self.__collection = self.__database[os.getenv("MONGO_COLLECTION_TRANSACTIONS_PROD")]
+            self.__transactionCollection = self.__database[os.getenv("MONGO_COLLECTION_TRANSACTIONS_PROD")]
+            self.__yearCollection = self.__database[os.getenv("MONGO_COLLECTION_YEARS_PROD")]
 
     def __generateId(self) -> str:
         """
         Returns a new and unused random id
         """
         newId = uuid.uuid1()
-        while self.__collection.find_one({"_id": newId}):
+        while self.__transactionCollection.find_one({"_id": newId}):
             newId = uuid.uuid1()
         return newId.hex
 
@@ -51,7 +52,7 @@ class MongoDBClient:
         NOMAP: bool: If True, will not map response to a Transaction object {Default: false}
         """
         noMap = params.get("noMap", False)
-        response = self.__collection.find_one({"_id": transactionId})
+        response = self.__transactionCollection.find_one({"_id": transactionId})
         # response will be None if not found
         if response:
             return response if noMap else self.__mapToTransaction(response)
@@ -75,7 +76,7 @@ class MongoDBClient:
         # construct default transaction object
         transaction = {"_id": self.__generateId(), "amount": amount, "note": note, "category": category,
                        "isIncome": isIncome, "date": date}
-        response = self.__collection.insert_one(transaction)
+        response = self.__transactionCollection.insert_one(transaction)
         if response.acknowledged:
             return response.inserted_id
         else:
@@ -98,7 +99,7 @@ class MongoDBClient:
             transaction["note"] = updatedTransaction.getNote()
             transaction["isIncome"] = updatedTransaction.getIsIncome()
             transaction["date"] = datetime.combine(updatedTransaction.getDate(), datetime.max.time())
-            response = self.__collection.update({"_id": updatedTransaction.getTId()}, transaction)
+            response = self.__transactionCollection.update({"_id": updatedTransaction.getTId()}, transaction)
             if response:
                 return response
             else:
@@ -111,7 +112,7 @@ class MongoDBClient:
         Returns None if successfully deleted or an Error if not.
         https://docs.mongodb.com/manual/reference/method/db.collection.remove/
         """
-        response = self.__collection.remove({"_id": transactionId})
+        response = self.__transactionCollection.remove({"_id": transactionId})
         if response["n"] == 1:
             # successfully deleted 1 league
             return True
@@ -126,23 +127,35 @@ class MongoDBClient:
         LIMIT: int: Limits the amount of entries returned {DEFAULT: 0}
         """
         limit = params.get("limit", 0)
-        cursor = self.__collection.find({}).limit(limit)
+        cursor = self.__transactionCollection.find({}).limit(limit)
         allTransactions = list()
         for document in cursor:
             allTransactions.append(self.__mapToTransaction(document))
         return allTransactions
 
-    def addBank(self, bank: Bank):
+    def addYear(self, year: Year):
         """
-       Adds a bank with a new generated ID to the database
-       Returns the new transaction's ID or an Error object if not inserted
+       Adds a Year with a new generated ID to the database
+       Returns the new Year's ID or an Error object if not inserted
        https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
        """
-        # construct default bank object
-        bank = {"_id": self.__generateId(), "amount": bank.getAmount(), "category": bank.getCategory(), "year": bank.getYear(), "month": bank.getMonth()}
-        response = self.__collection.insert_one(bank)
+        bankWrappers = dict()
+        # unwrap all BankWrappers and put them into a dict
+        for month in year.getBankWrappers().keys():
+            # unwrap all Banks and put them into a list
+            banks = list()
+            for bank in year.getBankWrappers()[month].getBanks():
+                bankDict = dict()
+                bankDict["amount"] = bank.getAmount()
+                bankDict["category"] = bank.getCategory()
+                banks.append(bankDict)
+            bankWrappers["banks"] = banks
+            bankWrappers["month"] = month
+        # construct default Year object
+        year = {"_id": self.__generateId(), "year": year.getYear(), "bankWrappers": bankWrappers}
+        response = self.__yearCollection.insert_one(year)
         if response.acknowledged:
             return response.inserted_id
         else:
-            # TODO return Error("Could not insert transaction into database.")
+            # TODO return Error("Could not insert Year into database.")
             return "error"
