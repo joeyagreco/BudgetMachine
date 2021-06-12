@@ -21,7 +21,21 @@ function onEnvironmentSwitchClick() {
     window.location = "/update-data-environment?checked=" + checked;
 }
 
+function setCurrentTransactionId(tId) {
+    sessionStorage["currentTransactionId"] = tId;
+}
+
+function getCurrentTransactionId() {
+    return sessionStorage["currentTransactionId"]
+}
+
+function onTransactionDeleteClick() {
+    // delete transaction
+    window.location = "delete-transaction?tId=" + getCurrentTransactionId();
+}
+
 function openTransaction(tId) {
+    setCurrentTransactionId(tId);
     onTransactionClick();
     // populate transaction form with appropriate values
     document.getElementById("amount-input").value = document.getElementById("transaction-amount-" + tId).innerHTML;
