@@ -23,17 +23,18 @@ def homepage():
     mongoDbClient = MongoDBClient()
     allTransactions = mongoDbClient.getAllTransactions(limit=100)
     allYears = mongoDbClient.getAllYears()
-    # check if years is an empty list OR current year is not in list
-    if len(allYears) == 0 or not YearProcessor.getYearByYearInt(allYears, currentDate.year):
+    # check if current year is in database
+    if not YearProcessor.getYearByYearInt(allYears, currentDate.year):
+        # current year is NOT in database
         # create a new, empty year
         selectedYearObj = Year("", currentDate.year, [])
         selectedYearObjId = mongoDbClient.addYear(selectedYearObj)
         selectedYearObj.setYId(selectedYearObjId)
-
     else:
-        selectedYearObj = YearProcessor.getYearByYearInt(allYears, int(selectedYear))
+        # current year is already in database
+        selectedYearObj = YearProcessor.getYearByYearInt(allYears, int(currentDate.year))
     # check if the current month is in the selectedYearObj
-    if not YearProcessor.monthExistsInYear(selectedYearObj, selectedMonth):
+    if not YearProcessor.monthExistsInYear(selectedYearObj, currentDate.month):
         # create a new, empty month to represent the current month
         newMonth = Month(currentDate.month, YearProcessor.getAllBanks())
         selectedYearObj.getMonths().append(newMonth)
