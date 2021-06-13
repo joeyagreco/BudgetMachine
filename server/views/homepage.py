@@ -33,6 +33,6 @@ def homepage():
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
     return render_template("homepage.html", categories=categories, currentDate=currentDate,
                            allTransactions=allTransactions, productionData=productionData,
-                           selected_year=selectedYear, selected_month=selectedMonth,
+                           selected_year=int(selectedYear), selected_month=int(selectedMonth),
                            selected_year_obj=selectedYearObj, years=allYears,
                            all_months=allMonths)
