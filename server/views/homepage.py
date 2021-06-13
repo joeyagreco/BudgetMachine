@@ -25,6 +25,7 @@ def homepage():
     # set default year and month if none given
     if not selectedYear:
         selectedYear = allYears[0].getYear()
+    if not selectedMonth:
         selectedMonth = allYears[0].getMonths()[0].getMonth()
     selectedYearObj = YearProcessor.getYearByYearInt(allYears, int(selectedYear))
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")

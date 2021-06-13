@@ -38,7 +38,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for year in years %}
-                        {% if year.getYear() == selected_year %}
+                        {% if year.getYear() == selected_year|int %}
                             <a class="dropdown-item active" href="#" onclick="submitDate('{{year.getYear()}}', null)">{{year.getYear()}}</a>
                         {% else %}
                             <a class="dropdown-item" href="#" onclick="submitDate('{{year.getYear()}}', null)">{{year.getYear()}}</a>
@@ -52,7 +52,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for month in selected_year_obj.getMonths() %}
-                        {% if month.getMonth() == selected_month %}
+                        {% if month.getMonth() == selected_month|int %}
                             <a class="dropdown-item active" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{month.getMonth()}}</a>
                         {% else %}
                             <a class="dropdown-item" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{month.getMonth()}}</a>

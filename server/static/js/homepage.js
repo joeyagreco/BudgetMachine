@@ -57,16 +57,17 @@ function onTransactionOpenClick(tId) {
 
 function submitDate(year, month) {
     // if year is null, then year is whatever is in the year button
-    // if month is null, then month is whatever is in the month button
-    if(!year) {
-        console.log("no year");
-        year = document.getElementById("select_year_button").value
+    // if month is null, we want to send no month since the new year should have the default first month
+    let url = "/"
+    if(year) {
+        //only year was given
+        url = url + "?selected_year=" + year
+    } else {
+        // only month was given
+        let yearButtonValue = document.getElementById("select_year_button").value;
+        url = url + "?selected_year=" + document.getElementById("select_year_button").value + "&selected_month=" + month;
     }
-    if(!month) {
-        console.log("no month");
-        month = document.getElementById("select_month_button").value
-    }
-    window.location = "/?selected_year=" + year + "&selected_month=" + month
+    window.location = url;
 }
 
 function init() {
