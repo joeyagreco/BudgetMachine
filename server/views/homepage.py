@@ -19,8 +19,9 @@ def homepage():
     # sort years
     allYears.sort(key=lambda x: x.getYear())
     selectedYear = allYears[0].getYear()
+    selectedMonth = allYears[0].getMonths()[0].getMonth()
     print(selectedYear)
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
     return render_template("homepage.html", categories=categories, currentDate=currentDate,
                            allTransactions=allTransactions, productionData=productionData,
-                           selected_year=selectedYear, years=allYears)
+                           selected_year=selectedYear, selected_month=selectedMonth, years=allYears)
