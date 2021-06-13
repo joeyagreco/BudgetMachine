@@ -32,8 +32,6 @@
         </div>
 
         <div class="date-dropdowns">
-            <!-- initialize global variables -->
-            {% set ns = namespace(selected_year_obj=None) %}
             <div class="yearDropdown">
                 <button class="btn btn-secondary dropdown-toggle" id="select_year_button" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{selected_year}}
@@ -41,25 +39,23 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for year in years %}
                         {% if year.getYear() == selected_year %}
-                            <a class="dropdown-item active" href="#" onclick="">{{year.getYear()}}</a>
-                            <!-- set variables for month dropdown -->
-                            {% set ns.selected_year_obj = year %}
+                            <a class="dropdown-item active" href="#" onclick="submitDate('{{year.getYear()}}', null)">{{year.getYear()}}</a>
                         {% else %}
-                            <a class="dropdown-item" href="#" onclick="">{{year.getYear()}}</a>
+                            <a class="dropdown-item" href="#" onclick="submitDate('{{year.getYear()}}', null)">{{year.getYear()}}</a>
                         {% endif %}
                     {% endfor %}
                 </div>
             </div>
             <div class="monthDropdown">
-                <button class="btn btn-secondary dropdown-toggle" id="select_month_button" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle" id="select_month_button" type="button" value="{{selected_month}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{selected_month}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {% for month in ns.selected_year_obj.getMonths() %}
+                    {% for month in selected_year_obj.getMonths() %}
                         {% if month.getMonth() == selected_month %}
-                            <a class="dropdown-item active" href="#" onclick="">{{month.getMonth()}}</a>
+                            <a class="dropdown-item active" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{month.getMonth()}}</a>
                         {% else %}
-                            <a class="dropdown-item" href="#" onclick="">{{month.getMonth()}}</a>
+                            <a class="dropdown-item" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{month.getMonth()}}</a>
                         {% endif %}
                     {% endfor %}
                 </div>

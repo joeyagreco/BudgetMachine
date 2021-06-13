@@ -55,6 +55,20 @@ function onTransactionOpenClick(tId) {
     document.getElementById("delete-button").style.display = "inline-block";
 }
 
+function submitDate(year, month) {
+    // if year is null, then year is whatever is in the year button
+    // if month is null, then month is whatever is in the month button
+    if(!year) {
+        console.log("no year");
+        year = document.getElementById("select_year_button").value
+    }
+    if(!month) {
+        console.log("no month");
+        month = document.getElementById("select_month_button").value
+    }
+    window.location = "/?selected_year=" + year + "&selected_month=" + month
+}
+
 function init() {
     // runs all methods that need to be ran on page load
     initializeTable();
