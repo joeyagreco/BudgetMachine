@@ -48,14 +48,14 @@
             </div>
             <div class="monthDropdown">
                 <button class="btn btn-secondary dropdown-toggle" id="select_month_button" type="button" value="{{selected_month}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{selected_month}}
+                    {{all_months[selected_month-1]}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for month in selected_year_obj.getMonths() %}
                         {% if month.getMonth() == selected_month|int %}
-                            <a class="dropdown-item active" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{month.getMonth()}}</a>
+                            <a class="dropdown-item active" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{all_months[month.getMonth()-1]}}</a>
                         {% else %}
-                            <a class="dropdown-item" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{month.getMonth()}}</a>
+                            <a class="dropdown-item" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{all_months[month.getMonth()-1]}}</a>
                         {% endif %}
                     {% endfor %}
                 </div>

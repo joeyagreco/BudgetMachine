@@ -5,6 +5,7 @@ from flask import render_template, request
 from server.app import app
 from server.clients.MongoDBClient import MongoDBClient
 from server.enums.Category import Category
+from server.enums.MonthNames import MonthNames
 from server.util import YamlProcessor
 from server.util.DateTimeCalculator import DateTimeCalculator
 from server.util.YearProcessor import YearProcessor
@@ -28,8 +29,10 @@ def homepage():
     if not selectedMonth:
         selectedMonth = allYears[0].getMonths()[0].getMonth()
     selectedYearObj = YearProcessor.getYearByYearInt(allYears, int(selectedYear))
+    allMonths = MonthNames.getAllMonths()
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
     return render_template("homepage.html", categories=categories, currentDate=currentDate,
                            allTransactions=allTransactions, productionData=productionData,
                            selected_year=selectedYear, selected_month=selectedMonth,
-                           selected_year_obj=selectedYearObj, years=allYears)
+                           selected_year_obj=selectedYearObj, years=allYears,
+                           all_months=allMonths)
