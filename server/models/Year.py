@@ -9,6 +9,9 @@ class Year:
         self.__year = year
         self.__months = months
 
+    def setYId(self, yId: str):
+        self.__yId = yId
+
     def getYId(self):
         return self.__yId
 

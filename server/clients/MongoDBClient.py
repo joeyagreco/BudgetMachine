@@ -1,6 +1,6 @@
 import os
 import uuid
-from typing import List
+from typing import List, Dict
 
 from dotenv import load_dotenv
 from pymongo import MongoClient
@@ -48,6 +48,30 @@ class MongoDBClient:
                            data["isIncome"], data["date"].date())
 
     @staticmethod
+    def __mapFromTransactionToDict(transaction: Transaction) -> Dict:
+        """
+        Maps the given Transaction object to a dictionary and returns it.
+        """
+        return {"_id": transaction.getTId(), "amount": transaction.getAmount(),
+                "note": transaction.getNote(), "category": transaction.getCategory(),
+                "isIncome": transaction.getIsIncome(), "date": datetime.combine(transaction.getDate(), datetime.max.time())}
+
+    @staticmethod
+    def __mapFromYearToDict(year: Year) -> Dict:
+        """
+        Maps the given Year object to a dictionary and returns it.
+        """
+        months = list()
+        for month in year.getMonths():
+            banks = list()
+            for bank in month.getBanks():
+                bankDict = {"amount": bank.getAmount(), "category": bank.getCategory()}
+                banks.append(bankDict)
+            monthDict = {"month": month.getMonth(), "banks": banks}
+            months.append(monthDict)
+        return {"_id": year.getYId(), "year": year.getYear(), "months": months}
+
+    @staticmethod
     def __mapToYear(data: dict) -> Year:
         """
         Maps the given data to a Year and returns it.
@@ -65,7 +89,7 @@ class MongoDBClient:
 
     def getTransaction(self, transactionId: str, **params) -> Transaction:
         """
-        Returns a dictionary object of the league or an Error object if not retrieved
+        Returns a dictionary object of the transaction or an Error object if not retrieved
         https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
         PARAMS:
         NOMAP: bool: If True, will not map response to a Transaction object {Default: false}
@@ -109,21 +133,12 @@ class MongoDBClient:
         https://docs.mongodb.com/manual/reference/method/db.collection.update/
         https://specify.io/how-tos/mongodb-update-documents
         """
-        transaction = self.getTransaction(updatedTransaction.getTId(), noMap=True)
-        if not transaction:
-            return None
+        response = self.__transactionCollection.update({"_id": updatedTransaction.getTId()}, self.__mapFromTransactionToDict(updatedTransaction))
+        if response:
+            return response
         else:
-            transaction["amount"] = updatedTransaction.getAmount()
-            transaction["category"] = updatedTransaction.getCategory()
-            transaction["note"] = updatedTransaction.getNote()
-            transaction["isIncome"] = updatedTransaction.getIsIncome()
-            transaction["date"] = datetime.combine(updatedTransaction.getDate(), datetime.max.time())
-            response = self.__transactionCollection.update({"_id": updatedTransaction.getTId()}, transaction)
-            if response:
-                return response
-            else:
-                # TODO return Error("Could not update transaction.")
-                return None
+            # TODO return Error("Could not update transaction.")
+            return None
 
     def deleteTransaction(self, transactionId: str) -> bool:
         """
@@ -193,3 +208,33 @@ class MongoDBClient:
         for document in cursor:
             allYears.append(self.__mapToYear(document))
         return allYears
+
+    def getYear(self, yearId: str, **params) -> Year:
+        """
+        Returns a dictionary object of the year or an Error object if not retrieved
+        https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
+        PARAMS:
+        NOMAP: bool: If True, will not map response to a Year object {Default: false}
+        """
+        noMap = params.get("noMap", False)
+        response = self.__yearCollection.find_one({"_id": yearId})
+        # response will be None if not found
+        if response:
+            return response if noMap else self.__mapToYear(response)
+        else:
+            # TODO return Error(f"Could not find a year with ID: {yearId}")
+            return None
+
+    def updateYear(self, updatedYear: Year):
+        """
+        Updates a year with given id
+        Returns a Document object or an Error object if not updated
+        https://docs.mongodb.com/manual/reference/method/db.collection.update/
+        https://specify.io/how-tos/mongodb-update-documents
+        """
+        response = self.__yearCollection.update({"_id": updatedYear.getYId()}, self.__mapFromYearToDict(updatedYear))
+        if response:
+            return response
+        else:
+            # TODO return Error("Could not update year.")
+            return None
