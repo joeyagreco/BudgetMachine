@@ -11,6 +11,7 @@ from server.models.Month import Month
 from server.models.Transaction import Transaction
 from server.models.Year import Year
 from server.util import YamlProcessor
+from server.util.Logger import Logger
 
 load_dotenv()
 
@@ -29,6 +30,10 @@ class MongoDBClient:
         if YamlProcessor.getVariable("PRODUCTION_DATA"):
             self.__transactionCollection = self.__database[os.getenv("MONGO_COLLECTION_TRANSACTIONS_PROD")]
             self.__yearCollection = self.__database[os.getenv("MONGO_COLLECTION_YEARS_PROD")]
+            # log all data
+            Logger.log("YEARS", self.__yearCollection.find({}))
+            Logger.log("TRANSACTIONS", self.__transactionCollection.find({}))
+
 
     def __generateId(self) -> str:
         """

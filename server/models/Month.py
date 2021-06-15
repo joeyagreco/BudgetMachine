@@ -8,6 +8,12 @@ class Month:
         self.__month = month
         self.__banks = banks
 
+    def __repr__(self):
+        return f"month: {self.__month}\nbanks: {[str(bank) for bank in self.__banks]}"
+
+    def __str__(self):
+        return f"month: {self.__month}\nbanks: {[str(bank) for bank in self.__banks]}"
+
     def getMonth(self):
         return self.__month
 
