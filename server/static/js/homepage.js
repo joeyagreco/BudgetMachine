@@ -70,7 +70,7 @@ function submitDate(year, month) {
     window.location = url;
 }
 
-function onBanksSaveButtonClick(yearId, categories) {
+function onBanksSaveButtonClick(yearId, monthNum, categories) {
     // saves changes made to bank input fields
     // first, make a map that maps category name to the budget amount
     categoryBudgetMap = {};
@@ -79,7 +79,7 @@ function onBanksSaveButtonClick(yearId, categories) {
         categoryBudgetMap[categories[i]] = document.getElementById("bank-budget-" + category).value;
     }
     // build data object
-    const data = {"yId": yearId, "categoriesBudgetMap": categoryBudgetMap};
+    const data = {"yId": yearId, "monthNum": monthNum, "banks": categoryBudgetMap};
     console.log(data);
     // send POST request
     let fetchPromise = post("/update-banks", data);

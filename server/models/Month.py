@@ -19,3 +19,6 @@ class Month:
 
     def getBanks(self):
         return self.__banks
+
+    def setBanks(self, banks: List[Bank]):
+        self.__banks = banks

@@ -10,10 +10,10 @@ class Year:
         self.__months = months
 
     def __repr__(self):
-        return f"yId: {self.__yId}\nyear: {self.__yId}\nmonths: {[str(month) for month in self.__months]}"
+        return f"yId: {self.__yId}\nyear: {self.__yId}\nmonths: {[str(self.__months[month]) for month in self.__months]}"
 
     def __str__(self):
-        return f"yId: {self.__yId}\nyear: {self.__yId}\nmonths: {[str(month) for month in self.__months]}"
+        return f"yId: {self.__yId}\nyear: {self.__yId}\nmonths: {[str(self.__months[month]) for month in self.__months]}"
 
     def setYId(self, yId: str):
         self.__yId = yId
