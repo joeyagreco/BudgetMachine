@@ -18,22 +18,32 @@
     cursor: pointer;
 }
 
+.category-full-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0px;
+}
+
 .category-banks-section {
     width: 100%;
-    background-color: pink;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 40px 50px 40px;
+    margin: 15px 0px;
+    border: solid;
+    border-radius: 25px;
+    background-color: grey;
 }
 
 .category-bank {
-    background-color: green;
 }
 
 .category-bank-title {
     font-size: 25px;
     text-align: center;
+    background-color: pink;
 }
 
 .category-bank-input {
@@ -43,6 +53,7 @@
 .category-bank-remaining-balance {
     text-align: center;
     font-size: 20px;
+    background-color: yellow;
 }
 
 .id-header {
