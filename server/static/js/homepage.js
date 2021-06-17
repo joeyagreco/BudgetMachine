@@ -70,6 +70,17 @@ function submitDate(year, month) {
     window.location = url;
 }
 
+function onBanksSaveButtonClick(categories) {
+    // saves changes made to bank input fields
+    // first, make a map that maps category name to the budget amount
+    categoryBudgetMap = {};
+    for(i=0; i<categories.length; i++) {
+        let category = categories[i]
+        categoryBudgetMap[categories[i]] = document.getElementById("bank-budget-" + category).value;
+    }
+    console.log(categoryBudgetMap);
+}
+
 function init() {
     // runs all methods that need to be ran on page load
     initializeTable();
