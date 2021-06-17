@@ -18,7 +18,7 @@ def homepage():
     # get variables
     selectedYear = request.args.get("selected_year")
     selectedMonth = request.args.get("selected_month")
-    categories = sorted([value for name, value in vars(Category).items() if name.isupper()])
+    bankCategories = sorted([value for name, value in vars(Category).items() if name.isupper()])
     currentDate = datetime.date.today()
     mongoDbClient = MongoDBClient()
     allTransactions = mongoDbClient.getAllTransactions(limit=100)
@@ -52,7 +52,7 @@ def homepage():
         # get most recent month
         selectedMonth = YearProcessor.getMostRecentMonth(allYears[0]).getMonth()
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
-    return render_template("homepage.html", categories=categories, currentDate=currentDate,
+    return render_template("homepage.html", bankCategories=bankCategories, currentDate=currentDate,
                            allTransactions=allTransactions, productionData=productionData,
                            selected_year=int(selectedYear), selected_month=int(selectedMonth),
                            selected_year_obj=selectedYearObj, years=allYears,

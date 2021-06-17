@@ -10,7 +10,6 @@ from server.models.Transaction import Transaction
 
 @app.route('/add-transaction', methods=["POST"])
 def addTransaction():
-    print("adding transaction")
     # convert the POST request headers into a python dictionary
     dataStr = request.data.decode("UTF-8")
     dataDict = ast.literal_eval(dataStr)
