@@ -66,14 +66,15 @@ class MongoDBClient:
         """
         Maps the given Year object to a dictionary and returns it.
         """
-        months = list()
-        for month in year.getMonths():
+        months = dict()
+        for monthNum in year.getMonths().keys():
+            month = year.getMonths()[monthNum]
             banks = list()
             for bank in month.getBanks():
                 bankDict = {"amount": bank.getAmount(), "category": bank.getCategory()}
                 banks.append(bankDict)
             monthDict = {"month": month.getMonth(), "banks": banks}
-            months.append(monthDict)
+            months[str(monthNum)] = monthDict
         return {"_id": year.getYId(), "year": year.getYear(), "months": months}
 
     @staticmethod
@@ -81,14 +82,15 @@ class MongoDBClient:
         """
         Maps the given data to a Year and returns it.
         """
-        months = list()
-        for month in data["months"]:
+        months = dict()
+        for monthNum in data["months"].keys():
+            month = data["months"][monthNum]
             banks = month["banks"]
             bankList = list()
             for bank in banks:
                 bankList.append(Bank(bank["amount"], bank["category"]))
             monthObj = Month(month["month"], bankList)
-            months.append(monthObj)
+            months[monthNum] = monthObj
 
         return Year(data["_id"], data["year"], months)
 
@@ -178,22 +180,9 @@ class MongoDBClient:
        Returns the new Year's ID or an Error object if not inserted
        https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
        """
-        months = list()
-        # unwrap all Months and put them into a dict
-        for month in year.getMonths():
-            monthDict = dict()
-            # unwrap all Banks and put them into a list
-            banks = list()
-            for bank in month.getBanks():
-                bankDict = dict()
-                bankDict["amount"] = bank.getAmount()
-                bankDict["category"] = bank.getCategory()
-                banks.append(bankDict)
-            monthDict["month"] = month.getMonth()
-            monthDict["banks"] = banks
-            months.append(monthDict)
-        # construct default Year object
-        year = {"_id": self.__generateId(), "year": year.getYear(), "months": months}
+        # deconstruct default Year object
+        year = self.__mapFromYearToDict(year)
+        year["_id"] = self.__generateId()
         response = self.__yearCollection.insert_one(year)
         if response.acknowledged:
             return response.inserted_id

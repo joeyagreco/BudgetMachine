@@ -21,6 +21,15 @@ class test_YearProcessor(unittest.TestCase):
         dummyMonth1 = Month(1, [])
         dummyMonth2 = Month(2, [])
         dummyMonth3 = Month(3, [])
-        dummyYear2000 = Year("", 2000, [dummyMonth1, dummyMonth2, dummyMonth3])
+        dummyYear2000 = Year("", 2000, {"1": dummyMonth1, "2": dummyMonth2, "3": dummyMonth3})
         self.assertTrue(YearProcessor.monthExistsInYear(dummyYear2000, 2))
         self.assertFalse(YearProcessor.monthExistsInYear(dummyYear2000, 4))
+
+    def test_getMostRecentMonth_happyPath(self):
+
+        dummyMonth1 = Month("1", [])
+        dummyMonth2 = Month("2", [])
+        dummyMonth3 = Month("3", [])
+        dummyYear2000 = Year("", 2000, {"1": dummyMonth1, "3": dummyMonth3, "2": dummyMonth2})
+        self.assertEqual(dummyMonth3, YearProcessor.getMostRecentMonth(dummyYear2000))
+

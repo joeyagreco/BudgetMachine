@@ -2,6 +2,7 @@ from typing import List
 
 from server.enums.Category import Category
 from server.models.Bank import Bank
+from server.models.Month import Month
 from server.models.Year import Year
 
 
@@ -18,12 +19,13 @@ class YearProcessor:
         return None
 
     @staticmethod
-    def monthExistsInYear(year: Year, monthInt: int) -> bool:
+    def monthExistsInYear(year: Year, month) -> bool:
         """
         Returns a boolean of whether or not the monthInt exists within the given Year.
         """
-        for month in year.getMonths():
-            if month.getMonth() == monthInt:
+        month = str(month)
+        for monthNum in year.getMonths().keys():
+            if monthNum == month:
                 return True
         return False
 
@@ -37,3 +39,12 @@ class YearProcessor:
         for category in categories:
             banks.append(Bank(0, category))
         return banks
+
+    @staticmethod
+    def getMostRecentMonth(year: Year) -> Month:
+        """
+        Returns the most recent Month in the given year.
+        """
+        monthStrings = sorted(year.getMonths().keys())
+        return year.getMonths()[monthStrings[-1]]
+

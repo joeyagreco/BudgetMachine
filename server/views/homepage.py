@@ -27,29 +27,30 @@ def homepage():
     if not YearProcessor.getYearByYearInt(allYears, currentDate.year):
         # current year is NOT in database
         # create a new, empty year
-        selectedYearObj = Year("", currentDate.year, [])
+        selectedYearObj = Year("", currentDate.year, {})
         selectedYearObjId = mongoDbClient.addYear(selectedYearObj)
         selectedYearObj.setYId(selectedYearObjId)
     else:
         # current year is already in database
         selectedYearObj = YearProcessor.getYearByYearInt(allYears, int(currentDate.year))
     # check if the current month is in the selectedYearObj
-    if not YearProcessor.monthExistsInYear(selectedYearObj, currentDate.month):
+    if not YearProcessor.monthExistsInYear(selectedYearObj, str(currentDate.month)):
         # create a new, empty month to represent the current month
-        newMonth = Month(currentDate.month, YearProcessor.getAllBanks())
-        selectedYearObj.getMonths().append(newMonth)
+        newMonth = Month(str(currentDate.month), YearProcessor.getAllBanks())
+        selectedYearObj.getMonths()[currentDate.month] = newMonth
         # update year in database
         mongoDbClient.updateYear(selectedYearObj)
         # get all years again with new month now added
         allYears.append(selectedYearObj)
     allMonths = MonthNames.getAllMonths()
-    # sort years
+    # sort years by year
     allYears.sort(key=lambda x: x.getYear())
     # set default year and month if none given
     if not selectedYear:
         selectedYear = allYears[0].getYear()
     if not selectedMonth:
-        selectedMonth = allYears[0].getMonths()[0].getMonth()
+        # get most recent month
+        selectedMonth = YearProcessor.getMostRecentMonth(allYears[0]).getMonth()
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
     return render_template("homepage.html", categories=categories, currentDate=currentDate,
                            allTransactions=allTransactions, productionData=productionData,

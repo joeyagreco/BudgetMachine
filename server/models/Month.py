@@ -4,8 +4,8 @@ from server.models.Bank import Bank
 
 
 class Month:
-    def __init__(self, month: int, banks: List[Bank]):
-        self.__month = month
+    def __init__(self, month: str, banks: List[Bank]):
+        self.__month = str(month)
         self.__banks = banks
 
     def __repr__(self):

@@ -51,11 +51,12 @@
                     {{all_months[selected_month-1]}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {% for month in selected_year_obj.getMonths() %}
-                        {% if month.getMonth() == selected_month|int %}
-                            <a class="dropdown-item active" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{all_months[month.getMonth()-1]}}</a>
+                    {% for monthNum in selected_year_obj.getMonths().keys() %}
+                        {% set month = selected_year_obj.getMonths()[monthNum] %}
+                        {% if monthNum == selected_month|int %}
+                            <a class="dropdown-item active" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{all_months[month.getMonth()|int-1]}}</a>
                         {% else %}
-                            <a class="dropdown-item" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{all_months[month.getMonth()-1]}}</a>
+                            <a class="dropdown-item" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{all_months[month.getMonth()|int-1]}}</a>
                         {% endif %}
                     {% endfor %}
                 </div>
