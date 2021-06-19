@@ -8,6 +8,7 @@ from pymongo import MongoClient
 from datetime import datetime
 
 from server.models.Bank import Bank
+from server.models.Income import Income
 from server.models.Month import Month
 from server.models.Transaction import Transaction
 from server.models.Year import Year
@@ -28,9 +29,11 @@ class MongoDBClient:
         # check if we want TEST or PROD data
         self.__transactionCollection = self.__database[os.getenv("MONGO_COLLECTION_TRANSACTIONS_TEST")]
         self.__yearCollection = self.__database[os.getenv("MONGO_COLLECTION_YEARS_TEST")]
+        self.__incomeCollection = self.__database[os.getenv("MONGO_COLLECTION_INCOME_TEST")]
         if YamlProcessor.getVariable("PRODUCTION_DATA"):
             self.__transactionCollection = self.__database[os.getenv("MONGO_COLLECTION_TRANSACTIONS_PROD")]
             self.__yearCollection = self.__database[os.getenv("MONGO_COLLECTION_YEARS_PROD")]
+            self.__incomeCollection = self.__database[os.getenv("MONGO_COLLECTION_INCOME_PROD")]
             # log all data
             Logger.log("YEARS", self.__yearCollection.find({}))
             Logger.log("TRANSACTIONS", self.__transactionCollection.find({}))
@@ -70,11 +73,13 @@ class MongoDBClient:
         months = dict()
         for monthNum in year.getMonths().keys():
             month = year.getMonths()[monthNum]
+            income = year.getMonths()[monthNum].getIncome()
             banks = list()
             for bank in month.getBanks():
                 bankDict = {"amount": bank.getAmount(), "budget": bank.getBudget(), "category": bank.getCategory()}
                 banks.append(bankDict)
-            monthDict = {"month": month.getMonth(), "banks": banks}
+            incomeDict = {"amount": income.getAmount()}
+            monthDict = {"month": month.getMonth(), "banks": banks, "income": incomeDict}
             months[str(monthNum)] = monthDict
         return {"_id": year.getYId(), "year": year.getYear(), "months": months}
 
@@ -90,7 +95,7 @@ class MongoDBClient:
             bankList = list()
             for bank in banks:
                 bankList.append(Bank(bank["amount"], bank["budget"], bank["category"]))
-            monthObj = Month(month["month"], bankList)
+            monthObj = Month(month["month"], bankList, Income(month["income"]["amount"]))
             months[monthNum] = monthObj
 
         return Year(data["_id"], data["year"], months)

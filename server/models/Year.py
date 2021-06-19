@@ -6,7 +6,7 @@ from server.models.Month import Month
 class Year:
     def __init__(self, yId: str, year: int, months: Dict[str, Month]):
         self.__yId = str(yId)
-        self.__year = year
+        self.__year = int(year)
         self.__months = months
 
     def __repr__(self):
