@@ -7,7 +7,7 @@ from server.clients.MongoDBClient import MongoDBClient
 from server.models.Bank import Bank
 
 
-@app.route('/update-banks', methods=["POST"])
+@app.route('/update-banks-and-income', methods=["POST"])
 def updateBanks():
     # convert the POST request headers into a python dictionary
     dataStr = request.data.decode("UTF-8")

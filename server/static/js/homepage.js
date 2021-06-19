@@ -70,19 +70,20 @@ function submitDate(year, month) {
     window.location = url;
 }
 
-function onBanksSaveButtonClick(yearId, monthNum, categories) {
-    // saves changes made to bank input fields
+function onCategorySaveButtonClick(yearId, monthNum, categories) {
+    // saves changes made to category input fields [income and banks]
     // first, make a map that maps category name to the budget amount
     categoryBudgetMap = {};
     for(i=0; i<categories.length; i++) {
         let category = categories[i]
         categoryBudgetMap[categories[i]] = document.getElementById("bank-budget-" + category).value;
     }
+    // get income
+    let income = document.getElementById("income-input").value;
     // build data object
-    const data = {"yId": yearId, "monthNum": monthNum, "banks": categoryBudgetMap};
-    console.log(data);
+    const data = {"yId": yearId, "monthNum": monthNum, "banks": categoryBudgetMap, "income": income};
     // send POST request
-    let fetchPromise = post("/update-banks", data);
+    let fetchPromise = post("/update-banks-and-income", data);
     fetchPromise.then(response => {
       window.location.href = response.url;
     });

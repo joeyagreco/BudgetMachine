@@ -53,7 +53,6 @@ def homepage():
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
     allTransactions = mongoDbClient.getAllTransactionsInYearMonth(selectedYear, selectedMonth)
     # populate Bank amounts
-    print(type(selectedMonth))
     BankProcessor.populateAmountField(selectedYearObj.getMonths()[str(selectedMonth)].getBanks(), allTransactions)
     return render_template("homepage.html", bankCategories=bankCategories, currentDate=currentDate,
                            allTransactions=allTransactions, productionData=productionData,
