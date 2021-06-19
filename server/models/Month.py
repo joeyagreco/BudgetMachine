@@ -26,3 +26,6 @@ class Month:
 
     def getIncome(self):
         return self.__income
+
+    def setIncome(self, income:int):
+        self.__income = income

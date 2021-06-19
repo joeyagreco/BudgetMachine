@@ -16,10 +16,13 @@ def updateBanks():
     banks = list()
     for category in dataDict["banks"]:
         banks.append(Bank(0, int(dataDict["banks"][category]), category))
+    # get income
+    income = int(dataDict["income"])
     # get year and update it with new Banks
     mongoDBClient = MongoDBClient()
     year = mongoDBClient.getYear(dataDict["yId"])
     year.getMonths()[dataDict["monthNum"]].setBanks(banks)
+    year.getMonths()[dataDict["monthNum"]].setIncome(income)
     # update year in database
     mongoDBClient.updateYear(year)
     return redirect(url_for("homepage"))
