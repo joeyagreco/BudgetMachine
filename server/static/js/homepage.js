@@ -40,7 +40,7 @@ function onTransactionOpenClick(tId) {
     // update submit button to say "update"
     document.getElementById("submit-button").innerHTML = "Update";
     // populate transaction form with appropriate values
-    document.getElementById("amount-input").value = document.getElementById("transaction-amount-" + tId).innerHTML;
+    document.getElementById("amount-input").value = document.getElementById("transaction-amount-" + tId).dataset.value;
     let category = document.getElementById("transaction-category-" + tId).innerHTML
     document.getElementById("category-button").innerHTML = category;
     // set dropdown to be selected

@@ -102,7 +102,7 @@
                 {% for transaction in allTransactions %}
                     <tr class="transaction-row" onclick="onTransactionOpenClick('{{transaction.getTId()}}')">
                         <td class="id-content" id="transaction-id-{{transaction.getTId()}}">{{transaction.getTId()}}</td>
-                        <td id="transaction-amount-{{transaction.getTId()}}">{{transaction.getAmount()}}</td>
+                        <td id="transaction-amount-{{transaction.getTId()}}" data-value="{{transaction.getAmount()}}">${{transaction.getAmount()}}.00</td>
                         <td id="transaction-category-{{transaction.getTId()}}">{{transaction.getCategory()}}</td>
                         <td id="transaction-note-{{transaction.getTId()}}">{{transaction.getNote()}}</td>
                         <td id="transaction-isIncome-{{transaction.getTId()}}">{{transaction.getIsIncome()}}</td>
