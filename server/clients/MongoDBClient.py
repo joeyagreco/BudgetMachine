@@ -2,6 +2,7 @@ import os
 import uuid
 from typing import List, Dict
 
+from bson import ObjectId
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from datetime import datetime
@@ -34,7 +35,6 @@ class MongoDBClient:
             Logger.log("YEARS", self.__yearCollection.find({}))
             Logger.log("TRANSACTIONS", self.__transactionCollection.find({}))
 
-
     def __generateId(self) -> str:
         """
         Returns a new and unused random id
@@ -59,7 +59,8 @@ class MongoDBClient:
         """
         return {"_id": transaction.getTId(), "amount": transaction.getAmount(),
                 "note": transaction.getNote(), "category": transaction.getCategory(),
-                "isIncome": transaction.getIsIncome(), "date": datetime.combine(transaction.getDate(), datetime.max.time())}
+                "isIncome": transaction.getIsIncome(),
+                "date": datetime.combine(transaction.getDate(), datetime.max.time())}
 
     @staticmethod
     def __mapFromYearToDict(year: Year) -> Dict:
@@ -140,7 +141,8 @@ class MongoDBClient:
         https://docs.mongodb.com/manual/reference/method/db.collection.update/
         https://specify.io/how-tos/mongodb-update-documents
         """
-        response = self.__transactionCollection.update({"_id": updatedTransaction.getTId()}, self.__mapFromTransactionToDict(updatedTransaction))
+        response = self.__transactionCollection.update({"_id": updatedTransaction.getTId()},
+                                                       self.__mapFromTransactionToDict(updatedTransaction))
         if response:
             return response
         else:
@@ -173,6 +175,17 @@ class MongoDBClient:
         for document in cursor:
             allTransactions.append(self.__mapToTransaction(document))
         return allTransactions
+
+    def getAllTransactionsInYearMonth(self, year: int, month: int) -> List[Transaction]:
+        """
+        Returns a list of all Transaction objects within the given year and month.
+        """
+        allTransactions = self.getAllTransactions()
+        matchingTransactions = list()
+        for transaction in allTransactions:
+            if transaction.getDate().month == int(month) and transaction.getDate().year == int(year):
+                matchingTransactions.append(transaction)
+        return matchingTransactions
 
     def addYear(self, year: Year):
         """

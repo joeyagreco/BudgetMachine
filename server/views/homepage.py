@@ -21,7 +21,6 @@ def homepage():
     bankCategories = sorted([value for name, value in vars(Category).items() if name.isupper()])
     currentDate = datetime.date.today()
     mongoDbClient = MongoDBClient()
-    allTransactions = mongoDbClient.getAllTransactions(limit=100)
     allYears = mongoDbClient.getAllYears()
     # check if current year is in database
     if not YearProcessor.getYearByYearInt(allYears, currentDate.year):
@@ -52,6 +51,7 @@ def homepage():
         # get most recent month
         selectedMonth = YearProcessor.getMostRecentMonth(allYears[0]).getMonth()
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
+    allTransactions = mongoDbClient.getAllTransactionsInYearMonth(selectedYear, selectedMonth)
     return render_template("homepage.html", bankCategories=bankCategories, currentDate=currentDate,
                            allTransactions=allTransactions, productionData=productionData,
                            selected_year=int(selectedYear), selected_month=int(selectedMonth),
