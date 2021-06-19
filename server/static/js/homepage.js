@@ -101,10 +101,10 @@ function setTotalAmountSpentAndDifference() {
     // get income amount
     let income = parseInt(document.getElementById("income-input").value);
     // set amount spent
-    document.getElementById("amount-spent").innerHTML = "$" + totalBankAmounts.toString() + ".00";
+    document.getElementById("amount-spent").innerHTML = "SPENT: $" + totalBankAmounts.toString() + ".00";
     document.getElementById("amount-spent").dataset.value = totalBankAmounts;
     // set difference
-    document.getElementById("income-difference").innerHTML = "$" + (income - totalBankAmounts).toString() + ".00";
+    document.getElementById("income-difference").innerHTML = "REMAINING: $" + (income - totalBankAmounts).toString() + ".00";
     document.getElementById("income-difference").dataset.value = income - totalBankAmounts;
 }
 
