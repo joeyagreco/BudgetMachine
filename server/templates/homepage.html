@@ -71,8 +71,8 @@
                  <div class="category-income">
                     <div class="category-income-title">Income</div>
                     <input class="form-control category-income-input" id="income-input" value="{{selected_year_obj.getMonths()[selected_month|string].getIncome()}}" type="number" placeholder="Income ($)" step="1" autocomplete="off">
-                    <div class="category-income-amount" id="amount-spent">amount spent</div>
-                    <div class="category-income-difference" id="income-difference">income - amount spent</div>
+                    <div class="category-income-amount" id="amount-spent" data-value=""></div>
+                    <div class="category-income-difference" id="income-difference" data-value=""></div>
                 </div>
             </div>
             <div class="category-banks-section">
@@ -80,8 +80,8 @@
                  <div class="category-bank">
                         <div class="category-bank-title bank-category">{{bank.getCategory()}}</div>
                         <input class="form-control category-bank-input" id="bank-budget-{{bank.getCategory()}}" value="{{bank.getBudget()}}" type="number" placeholder="Budget ($)" step="1" autocomplete="off">
-                        <div class="category-bank-amount">{{bank.getAmount()}}</div>
-                        <div class="category-bank-difference">{{bank.getBudget() - bank.getAmount()}}</div>
+                        <div class="category-bank-amount" data-value="{{bank.getAmount()}}">${{bank.getAmount()}}.00</div>
+                        <div class="category-bank-difference" data-value="{{bank.getBudget() - bank.getAmount()}}">${{bank.getBudget() - bank.getAmount()}}.00</div>
                 </div>
                 {% endfor %}
             </div>
