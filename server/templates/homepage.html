@@ -80,7 +80,7 @@
                  <div class="category-bank">
                         <div class="category-bank-title bank-category">{{bank.getCategory()}}</div>
                         <input class="form-control category-bank-input" id="bank-budget-{{bank.getCategory()}}" value="{{bank.getBudget()}}" type="number" placeholder="Budget ($)" step="1" autocomplete="off">
-                        <div class="category-bank-amount" data-value="{{bank.getAmount()}}">SPENT: ${{bank.getAmount()}}.00</div>
+                        <div class="category-bank-amount" id="bank-amount-spent-{{bank.getCategory()}}" data-value="{{bank.getAmount()}}">SPENT: ${{bank.getAmount()}}.00</div>
                         <div class="category-bank-difference" data-value="{{bank.getBudget() - bank.getAmount()}}">REMAINING: ${{bank.getBudget() - bank.getAmount()}}.00</div>
                 </div>
                 {% endfor %}

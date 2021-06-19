@@ -96,7 +96,7 @@ function setTotalAmountSpentAndDifference() {
     totalBankAmounts = 0;
     for(i=0; i<bankCategories.length; i++) {
         let category = bankCategories[i].innerHTML;
-        totalBankAmounts += parseInt(document.getElementById("bank-budget-" + category).value);
+        totalBankAmounts += parseInt(document.getElementById("bank-amount-spent-" + category).dataset.value);
     }
     // get income amount
     let income = parseInt(document.getElementById("income-input").value);
