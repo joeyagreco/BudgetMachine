@@ -2,13 +2,11 @@ import os
 import uuid
 from typing import List, Dict
 
-from bson import ObjectId
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from datetime import datetime
 
 from server.models.Bank import Bank
-from server.models.Income import Income
 from server.models.Month import Month
 from server.models.Transaction import Transaction
 from server.models.Year import Year
@@ -73,13 +71,11 @@ class MongoDBClient:
         months = dict()
         for monthNum in year.getMonths().keys():
             month = year.getMonths()[monthNum]
-            income = year.getMonths()[monthNum].getIncome()
             banks = list()
             for bank in month.getBanks():
                 bankDict = {"amount": bank.getAmount(), "budget": bank.getBudget(), "category": bank.getCategory()}
                 banks.append(bankDict)
-            incomeDict = {"amount": income.getAmount()}
-            monthDict = {"month": month.getMonth(), "banks": banks, "income": incomeDict}
+            monthDict = {"month": month.getMonth(), "banks": banks, "income": month.getIncome()}
             months[str(monthNum)] = monthDict
         return {"_id": year.getYId(), "year": year.getYear(), "months": months}
 
@@ -95,7 +91,7 @@ class MongoDBClient:
             bankList = list()
             for bank in banks:
                 bankList.append(Bank(bank["amount"], bank["budget"], bank["category"]))
-            monthObj = Month(month["month"], bankList, Income(month["income"]["amount"]))
+            monthObj = Month(month["month"], bankList, month["income"])
             months[monthNum] = monthObj
 
         return Year(data["_id"], data["year"], months)

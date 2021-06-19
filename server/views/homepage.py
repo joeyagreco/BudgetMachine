@@ -6,7 +6,6 @@ from server.app import app
 from server.clients.MongoDBClient import MongoDBClient
 from server.enums.Category import Category
 from server.enums.MonthNames import MonthNames
-from server.models.Income import Income
 from server.models.Month import Month
 from server.models.Year import Year
 from server.util import YamlProcessor
@@ -36,7 +35,7 @@ def homepage():
     # check if the current month is in the selectedYearObj
     if not YearProcessor.monthExistsInYear(selectedYearObj, str(currentDate.month)):
         # create a new, empty month to represent the current month
-        newMonth = Month(str(currentDate.month), YearProcessor.getAllBanks(), Income(0))
+        newMonth = Month(str(currentDate.month), YearProcessor.getAllBanks(), 0)
         selectedYearObj.getMonths()[str(currentDate.month)] = newMonth
         # update year in database
         mongoDbClient.updateYear(selectedYearObj)

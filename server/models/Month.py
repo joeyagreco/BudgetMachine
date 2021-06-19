@@ -1,14 +1,13 @@
 from typing import List
 
 from server.models.Bank import Bank
-from server.models.Income import Income
 
 
 class Month:
-    def __init__(self, month: str, banks: List[Bank], income: Income):
+    def __init__(self, month: str, banks: List[Bank], income: int):
         self.__month = str(month)
         self.__banks = banks
-        self.__income = income
+        self.__income = int(income)
 
     def __repr__(self):
         return f"month: {self.__month}\nbanks: {[str(bank) for bank in self.__banks]}"
