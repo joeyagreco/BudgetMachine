@@ -72,7 +72,7 @@
               <div id="category-section">
                 <button class="btn btn-secondary dropdown-toggle" id="category-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  {% for category in categories %}
+                  {% for category in bankCategories %}
                     <a class="dropdown-item category-item" href="#" onclick="updateCategoryDropdown('{{category}}')" id="{{category}}">{{category}}</a>
                   {% endfor %}
                 </div>
