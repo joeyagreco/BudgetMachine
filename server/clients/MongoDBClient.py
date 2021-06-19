@@ -72,7 +72,7 @@ class MongoDBClient:
             month = year.getMonths()[monthNum]
             banks = list()
             for bank in month.getBanks():
-                bankDict = {"amount": bank.getAmount(), "category": bank.getCategory()}
+                bankDict = {"amount": bank.getAmount(), "budget": bank.getBudget(), "category": bank.getCategory()}
                 banks.append(bankDict)
             monthDict = {"month": month.getMonth(), "banks": banks}
             months[str(monthNum)] = monthDict
@@ -89,7 +89,7 @@ class MongoDBClient:
             banks = month["banks"]
             bankList = list()
             for bank in banks:
-                bankList.append(Bank(bank["amount"], bank["category"]))
+                bankList.append(Bank(bank["amount"], bank["budget"], bank["category"]))
             monthObj = Month(month["month"], bankList)
             months[monthNum] = monthObj
 

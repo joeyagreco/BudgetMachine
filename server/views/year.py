@@ -15,7 +15,7 @@ def updateBanks():
     # put banks into a list of Bank objects
     banks = list()
     for category in dataDict["banks"]:
-        banks.append(Bank(int(dataDict["banks"][category]), category))
+        banks.append(Bank(0, int(dataDict["banks"][category]), category))
     # get year and update it with new Banks
     mongoDBClient = MongoDBClient()
     year = mongoDBClient.getYear(dataDict["yId"])

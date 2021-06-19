@@ -37,7 +37,7 @@ class YearProcessor:
         categories = sorted([value for name, value in vars(Category).items() if name.isupper()])
         banks = list()
         for category in categories:
-            banks.append(Bank(0, category))
+            banks.append(Bank(0, 0, category))
         return banks
 
     @staticmethod
