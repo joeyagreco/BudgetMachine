@@ -89,8 +89,26 @@ function onCategorySaveButtonClick(yearId, monthNum, categories) {
     });
 }
 
+function setTotalAmountSpentAndDifference() {
+    // get all bank values and sum them up
+    // get all bankCategories
+    bankCategories = document.getElementsByClassName("bank-category");
+    totalBankAmounts = 0;
+    for(i=0; i<bankCategories.length; i++) {
+        let category = bankCategories[i].innerHTML;
+        totalBankAmounts += parseInt(document.getElementById("bank-budget-" + category).value);
+    }
+    // get income amount
+    let income = parseInt(document.getElementById("income-input").value);
+    // set amount spent
+    document.getElementById("amount-spent").innerHTML = totalBankAmounts;
+    // set difference
+    document.getElementById("income-difference").innerHTML = income - totalBankAmounts;
+}
+
 function init() {
     // runs all methods that need to be ran on page load
     initializeTable();
     setEnvironmentSwitch();
+    setTotalAmountSpentAndDifference();
 }
