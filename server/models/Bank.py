@@ -13,6 +13,9 @@ class Bank:
     def getAmount(self):
         return self.__amount
 
+    def setAmount(self, amount: int):
+        self.__amount = amount
+
     def getBudget(self):
         return self.__budget
 

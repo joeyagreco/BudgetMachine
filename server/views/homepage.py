@@ -9,6 +9,7 @@ from server.enums.MonthNames import MonthNames
 from server.models.Month import Month
 from server.models.Year import Year
 from server.util import YamlProcessor
+from server.util.BankProcessor import BankProcessor
 from server.util.YearProcessor import YearProcessor
 
 
@@ -51,6 +52,8 @@ def homepage():
         selectedMonth = YearProcessor.getMostRecentMonth(allYears[0]).getMonth()
     productionData = YamlProcessor.getVariable("PRODUCTION_DATA")
     allTransactions = mongoDbClient.getAllTransactionsInYearMonth(selectedYear, selectedMonth)
+    # populate Bank amounts
+    BankProcessor.populateAmountField(selectedYearObj.getMonths()[selectedMonth].getBanks(), allTransactions)
     return render_template("homepage.html", bankCategories=bankCategories, currentDate=currentDate,
                            allTransactions=allTransactions, productionData=productionData,
                            selected_year=int(selectedYear), selected_month=int(selectedMonth),
