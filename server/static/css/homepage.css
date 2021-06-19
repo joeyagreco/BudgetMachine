@@ -37,9 +37,6 @@
     background-color: grey;
 }
 
-.category-bank {
-}
-
 .category-bank-title {
     font-size: 25px;
     text-align: center;
@@ -57,6 +54,28 @@
 }
 
 .category-bank-difference {
+    text-align: center;
+    font-size: 20px;
+    background-color: green;
+}
+
+.category-income-title {
+    font-size: 25px;
+    text-align: center;
+    background-color: pink;
+}
+
+.category-income-input {
+    text-align: center;
+}
+
+.category-income-amount {
+    text-align: center;
+    font-size: 20px;
+    background-color: yellow;
+}
+
+.category-income-difference {
     text-align: center;
     font-size: 20px;
     background-color: green;

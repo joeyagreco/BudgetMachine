@@ -67,6 +67,14 @@
             <div class="category-bank-submit-section">
                 <button class="btn btn-info btn-lg" id="submit-banks-button" type="button" onclick="onBanksSaveButtonClick('{{selected_year_obj.getYId()}}', '{{selected_month}}', {{bankCategories}})">Save Changes</button>
             </div>
+            <div class="category-income-section">
+                 <div class="category-income">
+                    <div class="category-income-title">Income</div>
+                    <input class="form-control category-income-input" id="income-input" value="{{selected_year_obj.getMonths()[selected_month|string].getIncome()}}" type="number" placeholder="Income ($)" step="1" autocomplete="off">
+                    <div class="category-income-amount">amount spent</div>
+                    <div class="category-income-difference">income - amount spent</div>
+                </div>
+            </div>
             <div class="category-banks-section">
                 {% for bank in selected_year_obj.getMonths()[selected_month|string].getBanks() %}
                  <div class="category-bank">
