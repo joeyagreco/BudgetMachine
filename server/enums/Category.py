@@ -5,3 +5,4 @@ class Category:
     PLEASURE = "PLEASURE"
     QOL = "QOL"  # Quality of Life
     SUBSCRIPTIONS = "SUBSCRIPTIONS"
+    INVESTMENTS = "INVESTMENTS"

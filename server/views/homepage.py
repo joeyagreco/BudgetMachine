@@ -36,7 +36,7 @@ def homepage():
     if not YearProcessor.monthExistsInYear(selectedYearObj, str(currentDate.month)):
         # create a new, empty month to represent the current month
         newMonth = Month(str(currentDate.month), YearProcessor.getAllBanks())
-        selectedYearObj.getMonths()[currentDate.month] = newMonth
+        selectedYearObj.getMonths()[str(currentDate.month)] = newMonth
         # update year in database
         mongoDbClient.updateYear(selectedYearObj)
         # get all years again with new month now added
@@ -54,7 +54,7 @@ def homepage():
     allTransactions = mongoDbClient.getAllTransactionsInYearMonth(selectedYear, selectedMonth)
     # populate Bank amounts
     print(type(selectedMonth))
-    BankProcessor.populateAmountField(selectedYearObj.getMonths()[int(selectedMonth)].getBanks(), allTransactions)
+    BankProcessor.populateAmountField(selectedYearObj.getMonths()[str(selectedMonth)].getBanks(), allTransactions)
     return render_template("homepage.html", bankCategories=bankCategories, currentDate=currentDate,
                            allTransactions=allTransactions, productionData=productionData,
                            selected_year=int(selectedYear), selected_month=int(selectedMonth),
