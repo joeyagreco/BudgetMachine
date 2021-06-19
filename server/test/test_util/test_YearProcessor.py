@@ -8,9 +8,9 @@ from server.util.YearProcessor import YearProcessor
 class test_YearProcessor(unittest.TestCase):
 
     def test_getYearByYearInt_happyPath(self):
-        dummyYear1999 = Year("", 1999, [])
-        dummyYear2000 = Year("", 2000, [])
-        dummyYear2001 = Year("", 2001, [])
+        dummyYear1999 = Year("", 1999, dict())
+        dummyYear2000 = Year("", 2000, dict())
+        dummyYear2001 = Year("", 2001, dict())
         self.assertEqual(2000,
                          YearProcessor.getYearByYearInt([dummyYear1999, dummyYear2000, dummyYear2001], 2000).getYear())
         self.assertEqual(None,
@@ -18,9 +18,9 @@ class test_YearProcessor(unittest.TestCase):
 
     def test_monthExistsInYear_happyPath(self):
 
-        dummyMonth1 = Month(1, [])
-        dummyMonth2 = Month(2, [])
-        dummyMonth3 = Month(3, [])
+        dummyMonth1 = Month("1", [])
+        dummyMonth2 = Month("2", [])
+        dummyMonth3 = Month("3", [])
         dummyYear2000 = Year("", 2000, {"1": dummyMonth1, "2": dummyMonth2, "3": dummyMonth3})
         self.assertTrue(YearProcessor.monthExistsInYear(dummyYear2000, 2))
         self.assertFalse(YearProcessor.monthExistsInYear(dummyYear2000, 4))
