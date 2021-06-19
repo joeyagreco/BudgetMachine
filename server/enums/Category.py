@@ -5,5 +5,3 @@ class Category:
     PLEASURE = "PLEASURE"
     QOL = "QOL"  # Quality of Life
     SUBSCRIPTIONS = "SUBSCRIPTIONS"
-    # INCOME CATEGORIES
-    PAYCHECKS = "PAYCHECKS"
