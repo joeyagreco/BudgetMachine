@@ -50,10 +50,16 @@
     text-align: center;
 }
 
-.category-bank-remaining-balance {
+.category-bank-amount {
     text-align: center;
     font-size: 20px;
     background-color: yellow;
+}
+
+.category-bank-difference {
+    text-align: center;
+    font-size: 20px;
+    background-color: green;
 }
 
 .id-header {

@@ -72,8 +72,9 @@
                  <div class="category-bank">
                         <div class="category-bank-title">{{bank.getCategory()}}</div>
                         <input class="form-control category-bank-input" id="bank-budget-{{bank.getCategory()}}" value="{{bank.getBudget()}}" type="number" placeholder="Budget ($)" step="1" autocomplete="off">
-                        <div class="category-bank-remaining-balance">{{bank.getAmount()}}</div>
-                    </div>
+                        <div class="category-bank-amount">{{bank.getAmount()}}</div>
+                        <div class="category-bank-difference">{{bank.getBudget() - bank.getAmount()}}</div>
+                </div>
                 {% endfor %}
             </div>
         </div>
