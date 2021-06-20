@@ -47,9 +47,6 @@ function onTransactionOpenClick(tId) {
     document.getElementById("category-button").innerHTML = category;
     // set dropdown to be selected
     document.getElementById(category).classList.add("active");
-    if(document.getElementById("transaction-isIncome-" + tId).innerHTML == "True") {
-        document.getElementById("flexSwitchCheckDefault").checked = "True";
-    }
     document.getElementById("note").value = document.getElementById("transaction-note-" + tId).innerHTML;
     document.getElementById("date-input").value = document.getElementById("transaction-date-" + tId).innerHTML;
     // make submit button clickable
