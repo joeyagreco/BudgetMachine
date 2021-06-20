@@ -17,6 +17,7 @@ function setEnvironmentSwitch() {
 
 function onEnvironmentSwitchClick() {
     // check if checkbox is checked or not then send to route
+    startLoading();
     let checked = document.getElementById("environment-switch").checked;
     window.location = "/update-data-environment?checked=" + checked;
 }
@@ -31,6 +32,7 @@ function getCurrentTransactionId() {
 
 function onTransactionDeleteClick() {
     // delete transaction
+    startLoading();
     window.location = "delete-transaction?tId=" + getCurrentTransactionId();
 }
 
@@ -58,6 +60,7 @@ function onTransactionOpenClick(tId) {
 function submitDate(year, month) {
     // if year is null, then year is whatever is in the year button
     // if month is null, we want to send no month since the new year should have the default first month
+    startLoading();
     let url = "/"
     if(year) {
         //only year was given
@@ -73,6 +76,7 @@ function submitDate(year, month) {
 function onCategorySaveButtonClick(yearId, monthNum, categories) {
     // saves changes made to category input fields [income and banks]
     // first, make a map that maps category name to the budget amount
+    startLoading();
     categoryBudgetMap = {};
     for(i=0; i<categories.length; i++) {
         let category = categories[i]
@@ -109,7 +113,7 @@ function setTotalAmountSpentAndDifference() {
 }
 
 function init() {
-    // runs all methods that need to be ran on page load
+    // calls all methods that need to be run on page load
     initializeTable();
     setEnvironmentSwitch();
     setTotalAmountSpentAndDifference();

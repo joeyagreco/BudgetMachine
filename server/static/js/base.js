@@ -34,6 +34,7 @@ function onTransactionCloseClick() {
 
 function onTransactionSubmitClick() {
     // first, check if this is a submit (add new) or update (update existing)
+    startLoading();
     if(document.getElementById("submit-button").innerHTML == "Submit") {
         submitTransaction();
     } else {
@@ -43,6 +44,7 @@ function onTransactionSubmitClick() {
 
 function submitTransaction() {
     // get data from html
+    startLoading();
     const amount = document.getElementById("amount-input").value;
     const note = document.getElementById("note").value;
     const category = document.getElementById("category-button").innerHTML;
@@ -59,6 +61,7 @@ function submitTransaction() {
 
 function updateTransaction() {
     // get data from html
+    startLoading();
     const tId = getCurrentTransactionId();
     const amount = document.getElementById("amount-input").value;
     const note = document.getElementById("note").value;
