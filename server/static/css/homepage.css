@@ -69,6 +69,12 @@
     text-align: center;
 }
 
+.category-amount-budgeted {
+    text-align: center;
+    font-size: 20px;
+    background-color: silver;
+}
+
 .category-income-amount {
     text-align: center;
     font-size: 20px;

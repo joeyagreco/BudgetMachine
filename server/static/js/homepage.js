@@ -98,18 +98,23 @@ function setTotalAmountSpentAndDifference() {
     // get all bankCategories
     bankCategories = document.getElementsByClassName("bank-category");
     totalBankAmounts = 0;
+    totalBudgetAmounts = 0;
     for(i=0; i<bankCategories.length; i++) {
         let category = bankCategories[i].innerHTML;
         totalBankAmounts += parseInt(document.getElementById("bank-amount-spent-" + category).dataset.value);
+        totalBudgetAmounts += parseInt(document.getElementById("bank-budget-" + category).value);
     }
     // get income amount
     let income = parseInt(document.getElementById("income-input").value);
     // set amount spent
-    document.getElementById("amount-spent").innerHTML = "SPENT: $" + totalBankAmounts.toString() + ".00";
+    document.getElementById("amount-spent").innerHTML = "TOTAL SPENT: $" + totalBankAmounts.toString() + ".00";
     document.getElementById("amount-spent").dataset.value = totalBankAmounts;
     // set difference
-    document.getElementById("income-difference").innerHTML = "REMAINING: $" + (income - totalBankAmounts).toString() + ".00";
+    document.getElementById("income-difference").innerHTML = "TOTAL REMAINING: $" + (income - totalBankAmounts).toString() + ".00";
     document.getElementById("income-difference").dataset.value = income - totalBankAmounts;
+    // set total budgeted amount
+    document.getElementById("amount-budgeted").innerHTML = "TOTAL BUDGETED: $" + totalBudgetAmounts.toString() + ".00";
+    document.getElementById("amount-budgeted").dataset.value = totalBudgetAmounts;
 }
 
 function init() {
