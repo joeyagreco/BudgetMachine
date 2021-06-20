@@ -2,7 +2,7 @@ function initializeTable() {
     $(document).ready( function () {
         $('#transactionsTable').DataTable(
             {
-                "order": [[ 5, "desc" ]],
+                "order": [[ 4, "desc" ]],
                 "iDisplayLength": 25,
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
             }

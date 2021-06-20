@@ -50,8 +50,7 @@ class MongoDBClient:
         """
         Maps the given data to a Transaction and returns it.
         """
-        return Transaction(data["_id"], data["amount"], data["note"], data["category"],
-                           data["isIncome"], data["date"].date())
+        return Transaction(data["_id"], data["amount"], data["note"], data["category"], data["date"].date())
 
     @staticmethod
     def __mapFromTransactionToDict(transaction: Transaction) -> Dict:
@@ -60,7 +59,6 @@ class MongoDBClient:
         """
         return {"_id": transaction.getTId(), "amount": transaction.getAmount(),
                 "note": transaction.getNote(), "category": transaction.getCategory(),
-                "isIncome": transaction.getIsIncome(),
                 "date": datetime.combine(transaction.getDate(), datetime.max.time())}
 
     @staticmethod
@@ -112,7 +110,7 @@ class MongoDBClient:
             # TODO return Error(f"Could not find a transaction with ID: {transactionId}")
             return None
 
-    def addTransaction(self, amount: float, note: str, category: str, isIncome: bool, date: datetime.date) -> str:
+    def addTransaction(self, amount: float, note: str, category: str, date: datetime.date) -> str:
         """
         Adds a transaction with a new generated ID to the database
         Returns the new transaction's ID or an Error object if not inserted
@@ -126,8 +124,7 @@ class MongoDBClient:
         else:
             date = datetime.combine(date, datetime.max.time())
         # construct default transaction object
-        transaction = {"_id": self.__generateId(), "amount": amount, "note": note, "category": category,
-                       "isIncome": isIncome, "date": date}
+        transaction = {"_id": self.__generateId(), "amount": amount, "note": note, "category": category, "date": date}
         response = self.__transactionCollection.insert_one(transaction)
         if response.acknowledged:
             return response.inserted_id

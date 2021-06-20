@@ -95,7 +95,6 @@
                     <th>Amount</th>
                     <th>Category</th>
                     <th>Note</th>
-                    <th>Income</th>
                     <th>Date</th>
                 </tr>
             </thead>
@@ -106,7 +105,6 @@
                         <td id="transaction-amount-{{transaction.getTId()}}" data-value="{{transaction.getAmount()}}">${{transaction.getAmount()}}.00</td>
                         <td id="transaction-category-{{transaction.getTId()}}">{{transaction.getCategory()}}</td>
                         <td id="transaction-note-{{transaction.getTId()}}">{{transaction.getNote()}}</td>
-                        <td id="transaction-isIncome-{{transaction.getTId()}}">{{transaction.getIsIncome()}}</td>
                         <td id="transaction-date-{{transaction.getTId()}}">{{transaction.getDate()}}</td>
                     </tr>
                 {% endfor %}

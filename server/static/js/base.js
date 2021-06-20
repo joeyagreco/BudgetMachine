@@ -48,10 +48,9 @@ function submitTransaction() {
     const amount = document.getElementById("amount-input").value;
     const note = document.getElementById("note").value;
     const category = document.getElementById("category-button").innerHTML;
-    const isIncome = document.getElementById("flexSwitchCheckDefault").checked.toString();
     const date = document.getElementById("date-input").value;
     // build data object
-    const data = {"amount": amount, "note": note, "category": category, "isIncome": isIncome, "date": date}
+    const data = {"amount": amount, "note": note, "category": category, "date": date}
     // send POST request
     let fetchPromise = post("/add-transaction", data);
     fetchPromise.then(response => {
@@ -66,10 +65,9 @@ function updateTransaction() {
     const amount = document.getElementById("amount-input").value;
     const note = document.getElementById("note").value;
     const category = document.getElementById("category-button").innerHTML;
-    const isIncome = document.getElementById("flexSwitchCheckDefault").checked.toString();
     const date = document.getElementById("date-input").value;
     // build data object
-    const data = {"tId": tId, "amount": amount, "note": note, "category": category, "isIncome": isIncome, "date": date}
+    const data = {"tId": tId, "amount": amount, "note": note, "category": category, "date": date}
     // send POST request
     let fetchPromise = post("/update-transaction", data);
     fetchPromise.then(response => {
@@ -115,9 +113,6 @@ function setTransactionPopupToDefaultValues() {
     let button =  document.getElementById("category-button")
     button.value = "Category";
     button.innerText = "Category";
-
-    // set income to false
-    document.getElementById("flexSwitchCheckDefault").checked=false;
 
     // set note to empty string
     document.getElementById("note").value = "";
