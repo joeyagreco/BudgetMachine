@@ -50,10 +50,10 @@
 
     <div class="bottomSection">
         <div id="form-background">
-          <div id="transaction-form">
+          <div id="transaction-form" class="primaryContrastBackgroundColor">
 
             <div id="popup-top-section">
-              <a href="#" id="close-button" onclick="onTransactionCloseClick()"><i class="fas fa-times-circle fa-lg"></i></a>
+              <a href="#" id="close-button" onclick="onTransactionCloseClick()"><i class="fas fa-times-circle fa-lg primaryColor"></i></a>
             </div>
 
             <div id="transaction-submit-form">
@@ -71,7 +71,7 @@
               </div>
 
               <div id="category-section">
-                <button class="btn btn-secondary dropdown-toggle" id="category-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</button>
+                <button class="btn btn-secondary dropdown-toggle primaryBackgroundColor" id="category-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   {% for category in bankCategories %}
                     <a class="dropdown-item category-item" href="#" onclick="updateCategoryDropdown('{{category}}')" id="{{category}}">{{category}}</a>
@@ -89,7 +89,7 @@
 
               <div class="button-row">
                 <button class="btn btn-secondary" id="delete-button" type="button" onclick="onTransactionDeleteClick()"><i class="fas fa-trash-alt"></i></button>
-                <button class="btn btn-secondary disabled" id="submit-button" type="button" onclick="onTransactionSubmitClick()">Submit</button>
+                <button class="btn btn-secondary primaryBackgroundColor disabled" id="submit-button" type="button" onclick="onTransactionSubmitClick()">Submit</button>
               </div>
 
             </div>
