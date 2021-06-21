@@ -1,0 +1,29 @@
+/*
+color palette:
+https://coolors.co/03045e-023e8a-0077b6-0096c7-00b4d8-48cae4-90e0ef-ade8f4-caf0f8
+
+*/
+
+.primaryColor {
+    color: #03045E !important;
+}
+
+.primaryBackgroundColor {
+    background-color: #03045E !important;
+}
+
+.primaryLightColor {
+    color: #CAF0F8 !important;
+}
+
+.primaryLightBackgroundColor {
+    background-color: #CAF0F8 !important;
+}
+
+.primaryContrastColor {
+    color: #00B4D8 !important;
+}
+
+.primaryContrastBackgroundColor {
+    background-color: #00B4D8 !important;
+}

@@ -8,6 +8,7 @@
     <meta name="author" content="Joey Greco">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}">
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
     <!-- jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -24,18 +25,18 @@
     <i class="fa fa-spinner fa-spin fa-5x"></i>
   </div>
 
-  <body>
+  <body class="primaryContrastBackgroundColor">
 
     <header>
       {% block header %}{% endblock %}
     </header>
 
-    <nav class="navbar navbar-light" id="navbar">
+    <nav class="navbar navbar-light primaryBackgroundColor" id="navbar">
       <a class="navbar-brand" href="#" onclick="reloadPage()">
-        <span>BudgetMachine</span>
+        <span class="primaryLightColor">BudgetMachine</span>
       </a>
-      <a class="nav-item nav-link" href="#" onclick=""><i class="fas fa-home"></i> <span class="navBarText">Home</span></a>
-      <a class="nav-item nav-link" href="#" onclick="onTransactionClick()"><i class="fas fa-dollar-sign"></i> <span class="navBarText">Transaction</span></a>
+      <a class="nav-item nav-link" href="#" onclick=""><i class="fas fa-home primaryLightColor"></i> <span class="navBarText primaryLightColor">Home</span></a>
+      <a class="nav-item nav-link" href="#" onclick="onTransactionClick()"><i class="fas fa-dollar-sign primaryLightColor"></i> <span class="navBarText primaryLightColor">Transaction</span></a>
     </nav>
 
     <div class="topSection">

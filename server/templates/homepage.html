@@ -33,7 +33,7 @@
 
         <div class="date-dropdowns">
             <div class="yearDropdown">
-                <button class="btn btn-secondary dropdown-toggle" id="select_year_button" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle primaryBackgroundColor" id="select_year_button" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{selected_year}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -47,15 +47,14 @@
                 </div>
             </div>
             <div class="monthDropdown">
-                <button class="btn btn-secondary dropdown-toggle" id="select_month_button" type="button" value="{{selected_month}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle " id="select_month_button" type="button" value="{{selected_month}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{all_months[selected_month-1]}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for monthNum in selected_year_obj.getMonths().keys() %}
                         {% set month = selected_year_obj.getMonths()[monthNum] %}
                         {% if monthNum == selected_month|int %}
-                            <a class="dropdown-item active" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{all_months[month.getMonth()|int-1]}}</a>
-                        {% else %}
+
                             <a class="dropdown-item" href="#" onclick="submitDate(null, '{{month.getMonth()}}')">{{all_months[month.getMonth()|int-1]}}</a>
                         {% endif %}
                     {% endfor %}
@@ -69,7 +68,7 @@
             </div>
             <div class="category-income-section">
                  <div class="category-income">
-                    <div class="category-income-title">Income</div>
+                    <div class="category-income-title">INCOME</div>
                     <input class="form-control category-income-input" id="income-input" value="{{selected_year_obj.getMonths()[selected_month|string].getIncome()}}" type="number" placeholder="Income ($)" step="1" autocomplete="off">
                     <div class="category-amount-budgeted" id="amount-budgeted" data-value=""></div>
                     <div class="category-income-amount" id="amount-spent" data-value=""></div>

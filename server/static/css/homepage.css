@@ -59,6 +59,10 @@
     background-color: green;
 }
 
+.category-income {
+    margin: 20px 0px 0px 0px;
+}
+
 .category-income-title {
     font-size: 25px;
     text-align: center;
